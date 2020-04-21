@@ -2,7 +2,7 @@
 
 `simple-streaming-server` is a simple server-based platform for streaming content.
 
-It uses Livepeer's open-source software, and does not require any cryptocurrency.
+It uses Livepeer's open-source software, and does not require any knowledge or awareness of cryptocurrency or blockchain.
 
 ## What does it do?
 
