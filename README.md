@@ -2,7 +2,7 @@
 
 `simple-streaming-server` is a simple server-based platform for streaming content.
 
-It uses Livepeer's open-source software, and does not require any knowledge or awareness of cryptocurrency or blockchain.
+It uses Livepeer's open-source software, and does not costs any cryptocurrency or require any awareness of blockchain.
 
 ## What does it do?
 
@@ -22,37 +22,37 @@ It will work on Mac or Linux (Ubuntu).
 
 1. Download the latest software build from [Livepeer's Release Page](https://github.com/livepeer/go-livepeer/releases), under where it says "Assets".
 
-- If you use a Mac, download the `livepeer-darwin-amd64.tar.gz` file
+- If you use a Mac, download the `livepeer-darwin-amd64.tar.gz` file to your _Downloads_ folder
 
 - If you use Linux (Ubuntu), download the `livepeer-linux-amd64.tar.gz` file
 
-2. Unzip the software using your operating system's zipping / unzipping software:
+2. Unzip the file:
 
-- On Mac, 
+- On Mac, simply open the file, and it will extract to the folder containing the file (_Downloads_).
 
 - On Linux (Ubuntu), simply open the `livepeer-darwin-amd64.tar.gz` file then click "Extract", and extract it to "Home".
 
 3. Open `Terminal`, and run the following:
 
-- On Mac, 
+- On Mac, run `./Downloads/livepeer-darwin-amd64/livepeer -broadcaster`
 
 - On Linux (Ubuntu), run `./livepeer-linux-amd64/livepeer -broadcaster`
 
 When you see the line `Video Ingest Endpoint - rtmp://127.0.0.1:1935`, your simple-streaming-server is running.
 
-## Next Steps
+# Next Steps
 
 Now that the `simple-streaming-server` is running, you can decide what to do next:
 
-- Publish Streaming Content to the `simple-streaming-server`
+- [Publish Streaming Content](#publish-streaming-content) to the `simple-streaming-server`
 
-- Playback Streaming Content from the `simple-streaming-server`
+- [Playback Streaming Content](#playback-streaming-content) from the `simple-streaming-server`
 
-- Learn more about how the `simple-streaming-server` works
+- Learn more about how the `simple-streaming-server` works in the [Platform Overview](#platform-overview)
 
-- Customise the code used in `simple-streaming-server`
+- [Customise the code](#customise-the-code) used in `simple-streaming-server`
 
-- Create a hosted `simple-streaming-server`
+- [Create a hosted instance](#hosted-setup) of `simple-streaming-server`
 
 ## Publish Streaming Content
 
@@ -119,7 +119,7 @@ You can use **OBS Studio** to configure your livestream however you like with a 
 
 13. Make sure your `simple-streaming-server` is running.
 
-14. Click "Start Streaming"
+14. Click "Start Streaming" (and also "Start Recording" if you also want to record the stream)
 
 15. See that the `simple-streaming-server` is receiving a stream called `obs-studio`.
 
