@@ -8,11 +8,11 @@ It uses Livepeer's open-source software, and does not require any cryptocurrency
 
 A `simple-streaming-server` can **receive** and **serve** streaming content.
 
+![image](https://user-images.githubusercontent.com/2212651/79846142-afe02400-83db-11ea-8cb0-01fb21fdbeb1.png)
+
 It can **receive** streaming content published from tools like [OBS Studio](https://obsproject.com/), [ManyCam](https://manycam.com/) or [FFmpeg](https://www.ffmpeg.org/), in `RTMP` format.
 
 It can **serve** streaming content over `http` with a `.m3u8` extension for playback in tools like [VLC Media Player](https://www.videolan.org/vlc/index.html), media-enabled Mobile browsers (Brave, Firefox or Chrome), embedded in an `html` page using a stream player such as `hls.js`, or in your own mobile application.
-
-![image](https://user-images.githubusercontent.com/2212651/79846142-afe02400-83db-11ea-8cb0-01fb21fdbeb1.png)
 
 ## Minimum Setup - Local Computer
 
@@ -20,13 +20,11 @@ Here are instructions to setup a `simple-streaming-server` on your local compute
 
 It will work on Mac or Linux (Ubuntu).
 
-1. Download the latest software build from [Livepeer's Release Page](https://github.com/livepeer/go-livepeer/releases).
+1. Download the latest software build from [Livepeer's Release Page](https://github.com/livepeer/go-livepeer/releases), under where it says "Assets".
 
 - If you use a Mac, download the `livepeer-darwin-amd64.tar.gz` file
 
 - If you use Linux (Ubuntu), download the `livepeer-linux-amd64.tar.gz` file
-
-![image](https://user-images.githubusercontent.com/2212651/79833859-b82f6380-83c9-11ea-9a78-e8eb1599218d.png)
 
 2. Unzip the software using your operating system's zipping / unzipping software:
 
@@ -74,7 +72,8 @@ You can use `FFmpeg` to generate a livestream showing a test card.
 
 2. Run the following command:
 ```
-ffmpeg -re -f lavfi -i testsrc=size=500x500:rate=30,format=yuv420p \
+ffmpeg -re -f lavfi -i \
+        testsrc=size=500x500:rate=30,format=yuv420p \
        -f lavfi -i sine -c:v libx264 -b:v 10000k \
        -x264-params keyint=30 -c:a aac -f flv \
        rtmp://127.0.0.1:1935/testcard
@@ -86,9 +85,7 @@ ffmpeg -re -f lavfi -i testsrc=size=500x500:rate=30,format=yuv420p \
 
 ### From a graphical user interface (OBS Studio)
 
-You can use **OBS Studio** to configure your livestream however you like with a drag-and-drop interface.
-
-0. Make sure your `simple-streaming-server` is running.
+You can use **OBS Studio** to configure your livestream however you like with a simple-but-powerful drag-and-drop interface.
 
 1. Download and install [OBS Studio](https://obsproject.com/)
 
@@ -112,11 +109,19 @@ You can use **OBS Studio** to configure your livestream however you like with a 
 
 ![image](https://user-images.githubusercontent.com/2212651/79847130-eb2f2280-83dc-11ea-86f9-de27a4d3686d.png)
 
-10. Click OK from "Settings".
+10. Click OK to close "Settings".
 
-11. Click "Start Streaming"
+11. Under "Sources", click the `+`
 
-12. See that the `simple-streaming-server` is receiving a stream called `obs-studio`.
+12. Add a "Text" source, and write some text
+
+![image](https://user-images.githubusercontent.com/2212651/79850922-3861c300-83e2-11ea-973c-e9ab1f9a49c1.png)
+
+13. Make sure your `simple-streaming-server` is running.
+
+14. Click "Start Streaming"
+
+15. See that the `simple-streaming-server` is receiving a stream called `obs-studio`.
 
 ![image](https://user-images.githubusercontent.com/2212651/79847289-25002900-83dd-11ea-8493-86f22e0dff56.png)
 
@@ -124,7 +129,9 @@ You can use **OBS Studio** to configure your livestream however you like with a 
 
 **Configuring Video**: The big black box in the middle of the screen it your "canvas" for visual content.
 
-You can have 1 or more "Scenes", and on each scene you can add 1 or more "Sources", e.g. video from a webcam.
+You can have 1 or more "Scenes", and on each scene you can add 1 or more "Sources".
+
+"Sources" can be text, image, recorded video, live video (from camera), screenshare, window share.
 
 **Configuring Audio**: The "Mixer" is where you configure the sound for your livestream.
 
@@ -136,20 +143,41 @@ There are many ways you can playback streaming content from your `simple-streami
 
 ![image](https://user-images.githubusercontent.com/2212651/79847817-e28b1c00-83dd-11ea-964d-792a331cbf9c.png)
 
-Here are a few options.
+Here are a few options:
 
 ### From the command line
 
-You can use `FFmpeg` to generate a livestream showing a test card.
+You can use `ffplay` as part of `FFmpeg` to playback a stream.
 
 1. Download and install [`FFmpeg`](https://www.ffmpeg.org/).
 
-2. Run `ffmpeg -re -f lavfi -i testsrc=size=500x500:rate=30,format=yuv420p -f lavfi -i sine -c:v libx264 -b:v 10000k -x264-params keyint=30 -c:a aac -f flv rtmp://127.0.0.1:1935/testcard`
+2. Publish a `testcard` stream using `FFmpeg` (see above).
 
-### From a graphical user interface
+3. Run `ffplay http://127.0.0.1:8935/stream/testcard.m3u8`
 
-You can use `FFmpeg` to generate a livestream showing a test card.
+4. See the content from the `testcard` stream:
 
+![image](https://user-images.githubusercontent.com/2212651/79850180-2af80900-83e1-11ea-86ea-2d97ea83d5ef.png)
+
+### From a graphical user interface (VLC Media Player)
+
+You can use **VLC Media Player** to playback a Network Stream.
+
+0. Publish a `obs-studio` stream using **OBS Studio** (see above).
+
+1. Download and install [VLC Media Player](https://www.videolan.org/vlc/index.html)
+
+2. Launch VLC Media Player
+
+3. Select Media > Open Network Stream... (Ctrl-N)
+
+4. Enter `http://127.0.0.1:8935/stream/obs-studio.m3u8` as the network URL
+
+![image](https://user-images.githubusercontent.com/2212651/79850448-93df8100-83e1-11ea-9133-1230ab121a66.png)
+
+5. Click "Play", and see the content from the `obs-studio` stream:
+
+![image](https://user-images.githubusercontent.com/2212651/79851134-88408a00-83e2-11ea-949d-98bbab60a7c0.png)
 
 ## Platform Overview
 
@@ -161,7 +189,16 @@ Content can be streamed to `rtmp://127.0.0.1:1935/streamID`.
 
 Content can be requested from `http://127.0.0.1:8935/stream/streamID`.
 
-
 ## Hosted Setup
 
-The most 
+A `simple-streaming-server` is likely best deployed on a dedicated server, such as a hosted Virtual Private Server (VPS).
+
+The instructions are largely similar as a local setup - with the only difference that you need to have ports 1935 and 8935 open.
+
+## Customise the code
+
+`simple-streaming-server` uses software from [Livepeer](https://github.com/livepeer) project.
+
+Livepeer is an open-source project and accepts contributions in the form of Pull Requests and Issues.
+
+You can talk to other members of the community on [Livepeer Community Discord channel](https://discord.gg/RR4kFAh).
