@@ -95,6 +95,8 @@ You can use **OBS Studio** to configure your livestream however you like with a 
 
 2. Launch OBS Studio, and cancel the auto-configuration wizard.
 
+![image](https://user-images.githubusercontent.com/2212651/79856956-ae6a2800-83ea-11ea-8e06-e807979bc9db.png)
+
 3. Go to Settings > Output
 
 4. Set "Output Mode" to "Advanced".
