@@ -38,7 +38,9 @@ It will work on Mac or Linux (Ubuntu).
 
 - On Linux (Ubuntu), run `./livepeer-linux-amd64/livepeer -broadcaster`
 
-When you see the line `Video Ingest Endpoint - rtmp://127.0.0.1:1935`, your simple-streaming-server is running.
+**`simple-streaming-server` will be running** when you see the line `Video Ingest Endpoint - rtmp://127.0.0.1:1935`
+
+![image](https://user-images.githubusercontent.com/2212651/79856413-f177cb80-83e9-11ea-8ece-ac1f9c143f08.png)
 
 # Next Steps
 
