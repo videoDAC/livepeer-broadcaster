@@ -50,6 +50,8 @@ Now that the `simple-streaming-server` is running, you can decide what to do nex
 
 - Learn more about how the `simple-streaming-server` works in the [Platform Overview](#platform-overview)
 
+- Add [Transcoding](#transcoding) to make content served by your `simple-streaming-server` more accessible to all
+
 - [Customise the code](#customise-the-code) used in `simple-streaming-server`
 
 - [Create a hosted instance](#hosted-setup) of `simple-streaming-server`
@@ -179,21 +181,39 @@ You can use **VLC Media Player** to playback a Network Stream.
 
 ![image](https://user-images.githubusercontent.com/2212651/79851134-88408a00-83e2-11ea-949d-98bbab60a7c0.png)
 
+## Hosted Setup
+
+A `simple-streaming-server` is likely best deployed on a dedicated server, such as a hosted Virtual Private Server (VPS).
+
+The instructions are largely similar as a local setup - with the only difference that you need to have ports 1935 and 8935 open.
+
+You will also need to configure your publishing and playback to reference the dedicated server's IP address, instead of 127.0.0.1, which is the address of your local computer.
+
 ## Platform Overview
 
 Video content to be published to, and requested from `simple-streaming-server`
 
 ![image](https://user-images.githubusercontent.com/2212651/79838698-0300a980-83d1-11ea-8ea8-b3d3022e065b.png)
 
-Content can be streamed to `rtmp://127.0.0.1:1935/streamID`.
+Content can be streamed to `rtmp://127.0.0.1:1935/streamID` to publish.
 
-Content can be requested from `http://127.0.0.1:8935/stream/streamID`.
+Content can be requested from `http://127.0.0.1:8935/stream/streamID` for playback.
 
-## Hosted Setup
+## Transcoding
 
-A `simple-streaming-server` is likely best deployed on a dedicated server, such as a hosted Virtual Private Server (VPS).
+Your `simple-streaming-server` currently is able to serve content in the source format that it was published in.
 
-The instructions are largely similar as a local setup - with the only difference that you need to have ports 1935 and 8935 open.
+Livepeer's software also allows you to maximise the accessibility of streaming content.
+
+It does this by Transcoding, or "shrinking" the content into "lighter" formats.
+
+These "lighter" formats have the following advantages for consumers of A/V content:
+
+- __Faster load time__ - the stream starts straight away, because less data is required (up to 900x less)
+- __Works on slower internet connections__ - due to less data required to be received (e.g. can work on 2G, 3G, 3.5G)
+- __Works on older devices__ - as it requires less power to play back content (e.g. on old smartphones)
+
+To include Transcoding, see [videoDAC's Streaming Back-End repository](https://github.com/videoDAC/streaming-back-end).
 
 ## Customise the code
 
