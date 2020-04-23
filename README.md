@@ -219,6 +219,8 @@ These "lighter" formats have the following advantages for consumers of A/V conte
 
 To include Transcoding, see [videoDAC's Streaming Back-End repository](https://github.com/videoDAC/streaming-back-end).
 
+![image](https://user-images.githubusercontent.com/59374467/78892333-d40c3e80-7a86-11ea-8823-5b90dc9055e1.png)
+
 ## Customise the code
 
 `simple-streaming-server` uses software from [Livepeer](https://github.com/livepeer) project.
