@@ -1,8 +1,10 @@
 # `simple-streaming-server`
 
-`simple-streaming-server` is a simple server-based platform for streaming content.
+`simple-streaming-server` is a server-based platform for streaming content.
 
-It uses Livepeer's open-source software, and does not costs any cryptocurrency or require any awareness of blockchain.
+The streaming content must be Video + Audio, and can be either live streaming content (e.g. from camera and microphone), or pre-recorded streaming content (e.g. from a file on disk).
+
+It uses Livepeer's open-source software, and does not cost any cryptocurrency or require any awareness of blockchain.
 
 ## What does it do?
 
@@ -10,9 +12,9 @@ A `simple-streaming-server` can **receive** and **serve** streaming content.
 
 ![image](https://user-images.githubusercontent.com/2212651/79846142-afe02400-83db-11ea-8cb0-01fb21fdbeb1.png)
 
-It can **receive** streaming content published from tools like [OBS Studio](https://obsproject.com/), [ManyCam](https://manycam.com/) or [FFmpeg](https://www.ffmpeg.org/), in `RTMP` format.
+It can **receive** streaming content published in `RTMP` format, from tools like [OBS Studio](https://obsproject.com/), [ManyCam](https://manycam.com/), [FFmpeg](https://www.ffmpeg.org/), or many other tools.
 
-It can **serve** streaming content over `http` with a `.m3u8` extension for playback in tools like [VLC Media Player](https://www.videolan.org/vlc/index.html), media-enabled Mobile browsers (Brave, Firefox or Chrome), embedded in an `html` page using a stream player such as `hls.js`, or in your own mobile application.
+It can **serve** streaming content over `http` with a `.m3u8` extension, for playback in tools like [VLC Media Player](https://www.videolan.org/vlc/index.html), media-enabled Mobile browsers (Brave, Firefox or Chrome), embedded in an `html` page using a stream player such as `hls.js`, or in your own mobile application.
 
 ## Minimum Setup - Local Computer
 
@@ -20,7 +22,7 @@ Here are instructions to setup a `simple-streaming-server` on your local compute
 
 It will work on Mac or Linux (Ubuntu).
 
-1. Download the latest software build from [Livepeer's Release Page](https://github.com/livepeer/go-livepeer/releases), under where it says "Assets".
+1. Download the latest software build from [Livepeer's Release Page](https://github.com/livepeer/go-livepeer/releases), under where it says `Assets`:
 
 - If you use a Mac, download the `livepeer-darwin-amd64.tar.gz` file to your _Downloads_ folder
 
@@ -64,7 +66,7 @@ There are many ways you can publish streaming content to your `simple-streaming-
 
 ![image](https://user-images.githubusercontent.com/2212651/79847772-d010e280-83dd-11ea-84dc-63b9c461e87a.png)
 
-Here are a few options.
+Here are a few options for publishing from a **command line interface**, or from a **graphical user interface**.
 
 ### From the command line
 
@@ -87,7 +89,7 @@ ffmpeg -re -f lavfi -i \
 
 ![image](https://user-images.githubusercontent.com/2212651/79846846-8d023f80-83dc-11ea-87f7-9232922abdb7.png)
 
-### From a graphical user interface (OBS Studio)
+### From a graphical user interface
 
 You can use **OBS Studio** to configure your livestream however you like with a simple-but-powerful drag-and-drop interface.
 
@@ -149,7 +151,7 @@ There are many ways you can playback streaming content from your `simple-streami
 
 ![image](https://user-images.githubusercontent.com/2212651/79847817-e28b1c00-83dd-11ea-964d-792a331cbf9c.png)
 
-Here are a few options:
+Here are a few options for publishing from a **command line interface**, or from a **graphical user interface**.
 
 ### From the command line
 
@@ -165,7 +167,7 @@ You can use `ffplay` as part of `FFmpeg` to playback a stream.
 
 ![image](https://user-images.githubusercontent.com/2212651/79850180-2af80900-83e1-11ea-86ea-2d97ea83d5ef.png)
 
-### From a graphical user interface (VLC Media Player)
+### From a graphical user interface
 
 You can use **VLC Media Player** to playback a Network Stream.
 
@@ -205,11 +207,9 @@ Content can be requested from `http://127.0.0.1:8935/stream/streamID` for playba
 
 ## Transcoding
 
-Your `simple-streaming-server` currently is able to serve content in the source format that it was published in.
+Your `simple-streaming-server` currently is able to serve content in the "source" format that it was published in. That is to say, that if you stream in e.g. `1920x1080` (Full HD), then the consumer will only be able to watch in `1920x1080`.
 
-Livepeer's software also allows you to maximise the accessibility of streaming content.
-
-It does this by Transcoding, or "shrinking" the content into "lighter" formats.
+Livepeer's software also allows you to maximise the accessibility of streaming content. It does this by Transcoding, or "shrinking" the content into "lighter" formats.
 
 These "lighter" formats have the following advantages for consumers of A/V content:
 
