@@ -44,6 +44,8 @@ It will work on Mac or Linux (Ubuntu).
 
 ![image](https://user-images.githubusercontent.com/2212651/79856413-f177cb80-83e9-11ea-8ece-ac1f9c143f08.png)
 
+Note: please note that a `simple-streaming-server` currently works best when deployed to a dedicated hosted server. This allows you to publish and serve content to and from it at all times. If you would to [create a hosted instance of `simple-streaming-server`](#hosted-setup).
+
 # Next Steps
 
 Now that the `simple-streaming-server` is running, you can decide what to do next:
@@ -52,13 +54,13 @@ Now that the `simple-streaming-server` is running, you can decide what to do nex
 
 - [Playback Streaming Content](#playback-streaming-content) from the `simple-streaming-server`
 
+- [Create a hosted instance](#hosted-setup) of `simple-streaming-server`
+
 - Learn more about how the `simple-streaming-server` works in the [Platform Overview](#platform-overview)
 
 - Add [Transcoding](#transcoding) to make content served by your `simple-streaming-server` more accessible to all
 
 - [Customise the code](#customise-the-code) used in `simple-streaming-server`
-
-- [Create a hosted instance](#hosted-setup) of `simple-streaming-server`
 
 ## Publish Streaming Content
 
