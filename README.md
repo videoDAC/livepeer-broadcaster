@@ -72,24 +72,43 @@ Here are a few options for publishing from a **command line interface**, or from
 
 ### From the command line
 
-You can use `FFmpeg` to generate a livestream showing a test card.
+You can publish content into `simple-streaming-server` from the command line, using `FFmpeg`.
+
+You can install `ffmpeg` on Linux using `sudo apt install ffmpeg`, and on a Mac by visiting [FFmpeg's website](https://www.ffmpeg.org/download.html).
+
+#### Test source
+
+You can use `FFmpeg` to generate a test source of content which can be published to the `simple-streaming-server`.
 
 0. Make sure your `simple-streaming-server` is running.
 
-1. Download and install [`FFmpeg`](https://www.ffmpeg.org/).
-
-2. Run the following command:
+1. Run the following command:
 ```
 ffmpeg -re -f lavfi -i \
         testsrc=size=500x500:rate=30,format=yuv420p \
        -f lavfi -i sine -c:v libx264 -b:v 10000k \
        -x264-params keyint=30 -c:a aac -f flv \
-       rtmp://127.0.0.1:1935/testcard
+       rtmp://127.0.0.1:1935/test_source
 ```
 
-3. See that the `simple-streaming-server` is receiving a stream called `testcard`.
+2. See that the `simple-streaming-server` is receiving a stream called `test_source`.
 
-![image](https://user-images.githubusercontent.com/2212651/79846846-8d023f80-83dc-11ea-87f7-9232922abdb7.png)
+#### Stream a video from disk
+
+You can use `FFmpeg` to read content stored on disk, which can be published to the `simple-streaming-server`.
+
+0. Make sure your `simple-streaming-server` is running.
+
+1. Run the following command, where `video.mov` is the video file you want to stream:
+```
+ffmpeg \
+        -re \
+        -i video.mov \
+        -codec copy \
+        -f flv rtmp://127.0.0.1:1935/recorded_content
+```
+
+2. See that the `simple-streaming-server` is receiving a stream called `recorded_content`.
 
 ### From a graphical user interface
 
@@ -163,9 +182,9 @@ You can use `ffplay` as part of `FFmpeg` to playback a stream.
 
 2. Publish a `testcard` stream using `FFmpeg` (see above).
 
-3. Run `ffplay http://127.0.0.1:8935/stream/testcard.m3u8`
+3. Run `ffplay http://127.0.0.1:8935/stream/test_source.m3u8`
 
-4. See the content from the `testcard` stream:
+4. See the content from the `test_source` stream:
 
 ![image](https://user-images.githubusercontent.com/2212651/79850180-2af80900-83e1-11ea-86ea-2d97ea83d5ef.png)
 
@@ -191,11 +210,40 @@ You can use **VLC Media Player** to playback a Network Stream.
 
 ## Hosted Setup
 
-A `simple-streaming-server` is likely best deployed on a dedicated server, such as a hosted Virtual Private Server (VPS).
+A `simple-streaming-server` is likely best deployed on a dedicated hosted server, such as a hosted Virtual Private Server (VPS).
 
-The instructions are largely similar as a local setup - with the only difference that you need to have ports 1935 and 8935 open.
+Your hosted server must have ports `1935` (to publish into the server) and `8935` open to the outside world:
 
-You will also need to configure your publishing and playback to reference the dedicated server's IP address, instead of 127.0.0.1, which is the address of your local computer.
+- `1935` allows publishers to publish content to the `simple-streaming-server` using `RTMP`
+
+- `8935` allows consumers to make requests to for `simple-streaming-server` to serve content using `hls` over `http`.
+
+After downloading and unzipping the binaries, run the following command to run the `simple-streaming-server` on your hosted server:
+
+```
+./livepeer-linux-amd64/livepeer \ 
+        -broadcaster
+        -rtmpAddr 0.0.0.0:1935
+        -httpAddr 0.0.0.0:8935
+```
+
+You can now publish content to, and request content to be served from, the `simple-streaming-server`.
+
+Note, you will need to use the hosted server's public IP address, instead of `127.0.0.1`, when using `ffmpeg`, `ffplay`, **OBS Studio** or **VLC Player**.
+
+### Security
+
+In the event that you want to restrict access to publishing content into the `simple-streaming-server`, you can restart the application with the following command:
+
+```
+./livepeer-linux-amd64/livepeer \ 
+        -broadcaster
+        -rtmpAddr 127.0.0.1:1935
+        -httpAddr 0.0.0.0:8935
+```
+
+The `simple-streaming-server` will now only accept content published from the hosted server itself, perhaps as a test signal, or streaming recorded content.
+
 
 ## Platform Overview
 
