@@ -66,7 +66,7 @@ Now that the `simple-streaming-server` is running, you can decide what to do nex
 
 There are many ways you can publish streaming content to your `simple-streaming-server`.
 
-![image](https://user-images.githubusercontent.com/2212651/79847772-d010e280-83dd-11ea-84dc-63b9c461e87a.png)
+![image](https://user-images.githubusercontent.com/2212651/80461006-4075b180-8952-11ea-9507-85db1a00d071.png)
 
 Here are a few options for publishing from a **command line interface**, or from a **graphical user interface**.
 
@@ -151,7 +151,7 @@ You can configure new sound devices in Settings > Audio, including microphones, 
 
 There are many ways you can playback streaming content from your `simple-streaming-server`.
 
-![image](https://user-images.githubusercontent.com/2212651/79847817-e28b1c00-83dd-11ea-964d-792a331cbf9c.png)
+![image](https://user-images.githubusercontent.com/2212651/80461163-7dda3f00-8952-11ea-8f64-5b1c0c38c279.png)
 
 Here are a few options for publishing from a **command line interface**, or from a **graphical user interface**.
 
