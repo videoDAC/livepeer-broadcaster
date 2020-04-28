@@ -1,6 +1,6 @@
 # `simple-streaming-server`
 
-`simple-streaming-server` is a server-based platform for streaming content.
+`simple-streaming-server` is an application for streaming content, running on a computer.
 
 The streaming content must be Video + Audio, and can be either live streaming content (e.g. from camera and microphone), or pre-recorded streaming content (e.g. from a file on disk).
 
@@ -10,7 +10,7 @@ It uses Livepeer's open-source software, and does not cost any cryptocurrency or
 
 A `simple-streaming-server` can **receive** and **serve** streaming content.
 
-![image](https://user-images.githubusercontent.com/2212651/79846142-afe02400-83db-11ea-8cb0-01fb21fdbeb1.png)
+![image](https://user-images.githubusercontent.com/2212651/80460726-dd841a80-8951-11ea-9556-391153100058.png)
 
 It can **receive** streaming content published in `RTMP` format, from tools like [OBS Studio](https://obsproject.com/), [ManyCam](https://manycam.com/), [FFmpeg](https://www.ffmpeg.org/), or many other tools.
 
