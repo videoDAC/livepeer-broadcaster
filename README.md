@@ -40,11 +40,11 @@ Here are instructions to setup a `simple-streaming-server` on a local computer. 
 
 4. Run `./livepeer -broadcaster`
 
-5. Wait until the text `Video Ingest Endpoint - rtmp://127.0.0.1:1935` is displayed:
-
-![image](https://user-images.githubusercontent.com/2212651/79856413-f177cb80-83e9-11ea-8ece-ac1f9c143f08.png)
+5. Wait until the text `Video Ingest Endpoint - rtmp://127.0.0.1:1935` is displayed.
 
 **`simple-streaming-server` is now running.**
+
+![image](https://user-images.githubusercontent.com/2212651/79856413-f177cb80-83e9-11ea-8ece-ac1f9c143f08.png)
 
 # Next Steps
 
