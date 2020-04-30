@@ -56,7 +56,9 @@ Now that `simple-streaming-server` is running, here are some further things you 
 
 - [Create a hosted instance of `simple-streaming-server`](#hosted-setup),
 
-- [Add a Transcoding service to increase accessibility of streaming content](#transcoding).
+- [Add a Transcoding service to increase accessibility of streaming content](#transcoding),
+
+- [Take a look at the roadmap for simple-streaming-server](#roadmap).
 
 ## Publish and Consume Content
 
@@ -313,11 +315,13 @@ Content can be published to `simple-streaming-server` via `RTMP` to port `1935`.
 
 Content can be consumed by requesting a URL with `.m3u8` extension, via `http` from port `8935`. `simple-streaming-server` will respond by serving a sequence of content segment files with `.hs` extensions over `http`, for playback.
 
+The code for this software is available on [Livepeer's go-livepeer repository](https://github.com/livepeer/go-livepeer).
+
 ## Transcoding
 
 `simple-streaming-server` can be configured to transcode the source content into different frame sizes and frame rates.
 
-Transcoding allows content to be consumed by devices with less performant network connections (bytes per second).
+Transcoding allows content to be consumed by devices with less-performant network connections (bytes per second).
 
 ### Local Transcoding
 
@@ -392,6 +396,8 @@ Transcoding activities can also be distributed across an Orchestrator, and one o
         -orchAddr 127.0.0.1:8936 \
         -v 99
 ```
+
+Note: to add more capacity
 
 **`simple-streaming-server` is now running with (Local) Distributed Transcoding enabled.**
 
@@ -498,3 +504,40 @@ This command will deposit some ETH into a smart contract in Livepeer's protocol,
 Further details on setting the maximum price to be paid for Transcoding can be found in [Livepeer's Broadcaster documentation](https://livepeer.readthedocs.io/en/latest/broadcasting.html).
 
 To find out more about Livepeer, go to this [10-minute primer](https://livepeer.org/primer/).
+
+## Roadmap
+
+This section describes additional features to be defined as part of this guide.
+
+### HTTPS Content Serving
+
+This section will describe how to configure `simple-streaming-server` to serve content as `https` instead of `http`.
+
+This is necessary for content to be served to webpages which themselves are served via `https`.
+
+- Install `nginx`
+- Configure `nginx`
+- Generate and install a cert
+- Test the installation
+
+### Web Player
+
+This section will describe how to deploy a web-based streaming content player.
+
+It will describe the code to be embedded into a webpage.
+
+It will also describe how to deploy a webpage hosted on [IPFS](https://ipfs.io), with name resolution using [ENS](https://ens.domains). An example of such a page is http://criticaltv.videodac.eth.link
+
+### Server-side Paywall
+
+This section will describe how to install and configure [Orchid](https://www.orchid.com/)'s open-source software to prevent `simple-streaming-server` from serving content unless the consumer is paying for the content in [OXT](https://coinmarketcap.com/currencies/orchid/).
+
+![image](https://user-images.githubusercontent.com/2212651/80733192-001d5b80-8b2b-11ea-8a57-f4877340bfe5.png)
+
+### GPU Transcoding
+
+This section will describe how to configure the `-transcoder` process to use a GPU for Transcoding.
+
+### Content Distribution Network
+
+This section will describe how to configure a commercial Content Distribution Network (CDN), such as Amazon CloudFront, Cloudflare or Akamai. This is required in order to be able to serve content to large numbers of viewers simultaneously.
