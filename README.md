@@ -1,10 +1,10 @@
 # `simple-streaming-server`
 
-`simple-streaming-server` is an application for streaming content, running on a computer.
+`simple-streaming-server` is an application for streaming content, running on a computer / server.
 
 The streaming content must be Video + Audio, and can be either live streaming content (e.g. from camera and microphone), or pre-recorded streaming content (e.g. from a file on disk).
 
-It uses Livepeer's open-source software, and does not cost any cryptocurrency or require any awareness of blockchain.
+It uses Livepeer's open-source software, and does not cost any cryptocurrency or require any awareness of blockchain. All software used in this guide is open-source.
 
 ## What does it do?
 
@@ -14,19 +14,17 @@ A `simple-streaming-server` can **receive** and **serve** streaming content.
 
 It can **receive** streaming content published in `RTMP` format, from tools like [OBS Studio](https://obsproject.com/), [ManyCam](https://manycam.com/), [FFmpeg](https://www.ffmpeg.org/), or many other tools.
 
-It can **serve** streaming content over `http` with a `.m3u8` extension, for playback in tools like [VLC Media Player](https://www.videolan.org/vlc/index.html), media-enabled Mobile browsers (Brave, Firefox or Chrome), embedded in an `html` page using a stream player such as `hls.js`, or in your own mobile application.
+It can **serve** streaming content over `http` with a `.m3u8` extension, for playback in tools like [VLC Media Player](https://www.videolan.org/vlc/index.html), media-enabled Mobile browsers (Brave, Firefox or Chrome), embedded in an `html` page using a stream player such as `hls.js`, or inside a mobile application.
 
-## Minimum Setup - Local Computer
+## Minimum Setup
 
-Here are instructions to setup a `simple-streaming-server` on your local computer.
+Here are instructions to setup a `simple-streaming-server` on a local computer. They will work on Mac or Linux (Ubuntu). 
 
-It will work on Mac or Linux (Ubuntu).
+1. Download the latest release of pre-compiled software from [Livepeer's Release Page](https://github.com/livepeer/go-livepeer/releases), under where it says `Assets`:
 
-1. Download the latest software build from [Livepeer's Release Page](https://github.com/livepeer/go-livepeer/releases), under where it says `Assets`:
+- On a Mac, download the `livepeer-darwin-amd64.tar.gz` file to the _Downloads_ folder
 
-- If you use a Mac, download the `livepeer-darwin-amd64.tar.gz` file to your _Downloads_ folder
-
-- If you use Linux (Ubuntu), download the `livepeer-linux-amd64.tar.gz` file
+- On Linux (Ubuntu), download the `livepeer-linux-amd64.tar.gz` file
 
 2. Unzip the file:
 
@@ -34,72 +32,79 @@ It will work on Mac or Linux (Ubuntu).
 
 - On Linux (Ubuntu), simply open the `livepeer-darwin-amd64.tar.gz` file then click "Extract", and extract it to "Home".
 
-3. Open `Terminal`, and run the following:
+3. Open `Terminal`, and navigate to the folder containig the `livepeer` binary:
 
-- On Mac, run `./Downloads/livepeer-darwin-amd64/livepeer -broadcaster`
+- On Mac, run `cd Downloads/livepeer-darwin-amd64`
 
-- On Linux (Ubuntu), run `./livepeer-linux-amd64/livepeer -broadcaster`
+- On Linux (Ubuntu), run `cd livepeer-linux-amd64`
 
-**`simple-streaming-server` will be running** when you see the line `Video Ingest Endpoint - rtmp://127.0.0.1:1935`
+4. Run `./livepeer -broadcaster`
+
+5. Wait until the text `Video Ingest Endpoint - rtmp://127.0.0.1:1935` is displayed:
 
 ![image](https://user-images.githubusercontent.com/2212651/79856413-f177cb80-83e9-11ea-8ece-ac1f9c143f08.png)
 
-Note: please note that a `simple-streaming-server` currently works best when deployed to a dedicated hosted server. This allows you to publish and serve content to and from it at all times. If you would to [create a hosted instance of `simple-streaming-server`](#hosted-setup).
+**`simple-streaming-server` is now running.**
 
 # Next Steps
 
-Now that the `simple-streaming-server` is running, you can decide what to do next:
+Now that `simple-streaming-server` is running, here are some further things you can do:
 
-- [Publish Streaming Content](#publish-streaming-content) to the `simple-streaming-server`
+- [Publish content to, and consume content from `simple-streaming-server`](#publish-and-consume-content),
 
-- [Playback Streaming Content](#playback-streaming-content) from the `simple-streaming-server`
+- [Learn more about how `simple-streaming-server` works](#architecture-summary),
 
-- [Create a hosted instance](#hosted-setup) of `simple-streaming-server`
+- [Create a hosted instance of `simple-streaming-server`](#hosted-setup),
 
-- Learn more about how the `simple-streaming-server` works in the [Platform Overview](#platform-overview)
+- [Add a Transcoding service to increase accessibility of streaming content](#transcoding).
 
-- Add [Transcoding](#transcoding) to make content served by your `simple-streaming-server` more accessible to all
+## Publish and Consume Content
 
-- [Customise the code](#customise-the-code) used in `simple-streaming-server`
+This section explains how to publish and consume content to and from `simple-streaming-server`.
 
-## Publish Streaming Content
+This can be done via a [command line interface](#command-line-interface) using `FFmpeg`, or from a [graphical user interface](#graphical-user-interface) using **OBS Studio** and **VLC Media Player**.
 
-There are many ways you can publish streaming content to your `simple-streaming-server`.
+### Command Line Interface
 
-![image](https://user-images.githubusercontent.com/2212651/80461006-4075b180-8952-11ea-9507-85db1a00d071.png)
+This section explains how to publish and consume content to and from `simple-streaming-server` using a command line interface (CLI).
 
-Here are a few options for publishing from a **command line interface**, or from a **graphical user interface**.
+#### Install `FFmpeg`
 
-### From the command line
+Install `FFmpeg` on Linux (Ubuntu) using `sudo apt install ffmpeg`
 
-You can publish content into `simple-streaming-server` from the command line, using `FFmpeg`.
+Install `FFmpeg` on a Mac using instructions on [FFmpeg's website](https://www.ffmpeg.org/download.html#build-mac).
 
-You can install `ffmpeg` on Linux using `sudo apt install ffmpeg`, and on a Mac by visiting [FFmpeg's website](https://www.ffmpeg.org/download.html).
+#### Publish a test source
 
-#### Test source
+`FFmpeg` can be used to generate and publish a test source of content to `simple-streaming-server`:
 
-You can use `FFmpeg` to generate a test source of content which can be published to the `simple-streaming-server`.
-
-0. Make sure your `simple-streaming-server` is running.
+0. Make sure `simple-streaming-server` is running on localhost `127.0.0.1`.
 
 1. Run the following command:
 ```
 ffmpeg -re -f lavfi -i \
-        testsrc=size=500x500:rate=30,format=yuv420p \
-       -f lavfi -i sine -c:v libx264 -b:v 10000k \
-       -x264-params keyint=30 -c:a aac -f flv \
+       testsrc=size=500x500:rate=30,format=yuv420p \
+       -f lavfi -i sine -c:v libx264 -b:v 1000k \
+       -x264-params keyint=60 -c:a aac -f flv \
        rtmp://127.0.0.1:1935/test_source
 ```
+  - `test_source` is the "stream key" for this publication.
+  - `size=500x500` defines the dimensions of the test video source in pixels
+  - `rate=30` defines the frame rate of the test video in frames per second
+  - `1000k` defines the bitrate for the stream
+  - `keyint=60` defines the keyframe interval in frames
+  
+2. See that `simple-streaming-server` is receiving a stream called `test_source`.
 
-2. See that the `simple-streaming-server` is receiving a stream called `test_source`.
+![image](https://user-images.githubusercontent.com/2212651/80678235-2a91f900-8ad8-11ea-801e-fd2724eb5b43.png)
 
-#### Stream a video from disk
+#### Publish a recorded video
 
-You can use `FFmpeg` to read content stored on disk, which can be published to the `simple-streaming-server`.
+`FFmpeg` can be used to publish recorded content to `simple-streaming-server`:
 
-0. Make sure your `simple-streaming-server` is running.
+0. Make sure `simple-streaming-server` is running on localhost `127.0.0.1`.
 
-1. Run the following command, where `video.mov` is the video file you want to stream:
+1. Run the following command:
 ```
 ffmpeg \
         -re \
@@ -107,16 +112,57 @@ ffmpeg \
         -codec copy \
         -f flv rtmp://127.0.0.1:1935/recorded_content
 ```
+  - `recorded_content` is the "stream key" for this publication.
+  
+2. See that `simple-streaming-server` is receiving a stream called `recorded_content`.
 
-2. See that the `simple-streaming-server` is receiving a stream called `recorded_content`.
+![image](https://user-images.githubusercontent.com/2212651/80683054-3209d000-8ae1-11ea-9d3f-edd4d22be918.png)
 
-### From a graphical user interface
+#### Consume content using ffplay
 
-You can use **OBS Studio** to configure your livestream however you like with a simple-but-powerful drag-and-drop interface.
+`ffplay` is part of `FFmpeg`, and can be used to request and playback content from `simple-streaming-server`.
+
+0. Make sure content is being published into `simple-streaming-server`.
+
+1. Run `ffplay http://127.0.0.1:8935/stream/test_source.m3u8`
+
+  - `test_source` is the "stream key" used when publishing content to `simple-streaming-server`.
+
+2. See the content from the `test_source` stream being played back:
+
+![image](https://user-images.githubusercontent.com/2212651/79850180-2af80900-83e1-11ea-86ea-2d97ea83d5ef.png)
+
+#### Inspect content metadata
+
+`curl` is command line tool and library for transferring data with URLs, and can be used to inspect metadata of content published by `simple-streaming-server`.
+
+0. Make sure content is being published into `simple-streaming-server`.
+
+1. Run `curl http://127.0.0.1:8935/stream/test_source.m3u8`
+
+  - `test_source` is the "stream key" used when publishing content to `simple-streaming-server`.
+
+2. View metadata about the stream(s) of content available for consumption, with `.m3u8` extension(s):
+
+![image](https://user-images.githubusercontent.com/2212651/80692866-db57c280-8aef-11ea-9f68-05659ad3c7c6.png)
+
+3. Run `curl http://127.0.0.1:8935/stream/test_source/source.m3u8`
+
+4. View metadata about the segment(s) of content available for consumption, with `.ts` extension(s):
+
+![image](https://user-images.githubusercontent.com/2212651/80693355-810b3180-8af0-11ea-9c98-a23e73070d77.png)
+
+### Graphical User Interface
+
+This section explains how to [publish content to](#publish-content-using-obs-studio) and [consume content from](#consume-content-using-vlc-media-player) `simple-streaming-server` using graphical user interfaces (GUIs).
+
+#### Publish content using OBS Studio
+
+**OBS Studio** can be used to configure and publish streaming content to `simple-streaming-server`:
 
 1. Download and install [OBS Studio](https://obsproject.com/)
 
-2. Launch OBS Studio, and cancel the auto-configuration wizard.
+2. Launch OBS Studio, and decline to use the auto-configuration wizard.
 
 ![image](https://user-images.githubusercontent.com/2212651/79856956-ae6a2800-83ea-11ea-8e06-e807979bc9db.png)
 
@@ -132,67 +178,33 @@ You can use **OBS Studio** to configure your livestream however you like with a 
 
 7. Set "Service" to `Custom`
 
-8. Set "Server" to `rtmp://127.0.0.1`
-
-9. Set "Stream Key" to `obs-studio`
+8. Set "Server" to `rtmp://127.0.0.1` and "Stream Key" to `obs-studio`
 
 ![image](https://user-images.githubusercontent.com/2212651/79847130-eb2f2280-83dc-11ea-86f9-de27a4d3686d.png)
 
-10. Click OK to close "Settings".
+9. Click OK to close "Settings".
 
-11. Under "Sources", click the `+`
+10. Under "Sources", click the `+` and select "Text" source.
 
-12. Add a "Text" source, and write some text
+11. Add some text
 
 ![image](https://user-images.githubusercontent.com/2212651/79850922-3861c300-83e2-11ea-973c-e9ab1f9a49c1.png)
 
-13. Make sure your `simple-streaming-server` is running.
+12. Make sure `simple-streaming-server` is running.
 
-14. Click "Start Streaming" (and also "Start Recording" if you also want to record the stream)
+13. Click "Start Streaming" (and also "Start Recording" if you also want to record the stream).
 
-15. See that the `simple-streaming-server` is receiving a stream called `obs-studio`.
+14. See that `simple-streaming-server` is receiving a stream called `obs-studio`.
 
 ![image](https://user-images.githubusercontent.com/2212651/79847289-25002900-83dd-11ea-8493-86f22e0dff56.png)
 
-#### Configuring Content in OBS
+[Learn about what other sources of content can be configured](#configuring-content-in-obs-studio).
 
-**Configuring Video**: The big black box in the middle of the screen it your "canvas" for visual content.
+#### Consume content using VLC Media Player
 
-You can have 1 or more "Scenes", and on each scene you can add 1 or more "Sources".
+**VLC Media Player** can be used to request and playback content from `simple-streaming-server`.
 
-"Sources" can be text, image, recorded video, live video (from camera), screenshare, window share.
-
-**Configuring Audio**: The "Mixer" is where you configure the sound for your livestream.
-
-You can configure new sound devices in Settings > Audio, including microphones, sound cards and sounds being played by your computer.
-
-## Playback Streaming Content
-
-There are many ways you can playback streaming content from your `simple-streaming-server`.
-
-![image](https://user-images.githubusercontent.com/2212651/80461163-7dda3f00-8952-11ea-8f64-5b1c0c38c279.png)
-
-Here are a few options for publishing from a **command line interface**, or from a **graphical user interface**.
-
-### From the command line
-
-You can use `ffplay` as part of `FFmpeg` to playback a stream.
-
-1. Download and install [`FFmpeg`](https://www.ffmpeg.org/).
-
-2. Publish a `testcard` stream using `FFmpeg` (see above).
-
-3. Run `ffplay http://127.0.0.1:8935/stream/test_source.m3u8`
-
-4. See the content from the `test_source` stream:
-
-![image](https://user-images.githubusercontent.com/2212651/79850180-2af80900-83e1-11ea-86ea-2d97ea83d5ef.png)
-
-### From a graphical user interface
-
-You can use **VLC Media Player** to playback a Network Stream.
-
-0. Publish a `obs-studio` stream using **OBS Studio** (see above).
+0. Make sure content is being published into `simple-streaming-server`.
 
 1. Download and install [VLC Media Player](https://www.videolan.org/vlc/index.html)
 
@@ -208,73 +220,281 @@ You can use **VLC Media Player** to playback a Network Stream.
 
 ![image](https://user-images.githubusercontent.com/2212651/79851134-88408a00-83e2-11ea-949d-98bbab60a7c0.png)
 
+#### Configuring Content in OBS Studio
+
+**OBS Studio** can be used to add video and audio content sources to be published to `simple-streaming-server`.
+
+![image](https://user-images.githubusercontent.com/2212651/79856956-ae6a2800-83ea-11ea-8e06-e807979bc9db.png)
+
+- **Configuring Video**:
+  - The big black box in the middle of the screen is the "canvas" for visual content.
+  - One or more "Scenes" can be configured, which can be switched between when publishing
+  - Zero or more "Sources" can be added to each "Scene", to 
+  - Examples of "Sources" are: _static text_, _images_, _recorded videos_, _live videos_ (e.g. from a camera), _screenshares_, _window shares_.
+
+**Configuring Audio**
+  - Audio being published can be monitored in the "Mixer", both visually and audibly
+  - Audio sources can be configured in Settings > Audio, and will appear in the "Mixer"
+  - Examples of sources are _sound cards_, _microphones_ and _audio played by the computer_.
+
+Here is an example of a variety of different content sources configured in **OBS Studio**:
+
+![Screenshot from 2020-03-14 23-43-55](https://user-images.githubusercontent.com/2212651/80687655-3eddf200-8ae8-11ea-809e-235acc9d8abf.png)
+
 ## Hosted Setup
 
-A `simple-streaming-server` is likely best deployed on a dedicated hosted server, such as a hosted Virtual Private Server (VPS).
+A `simple-streaming-server` can be deployed on a hosted server. For this It is assumed that this hosted server is running Linux (Ubuntu).
 
-Your hosted server must have ports `1935` (to publish into the server) and `8935` open to the outside world:
+### `simple-streaming-server` Access Options
 
-- `1935` allows publishers to publish content to the `simple-streaming-server` using `RTMP`
+It is necessary to configure `simple-streaming-server` appropriately, in order to allow required remote access to the server.
 
-- `8935` allows consumers to make requests to for `simple-streaming-server` to serve content using `hls` over `http`.
+#### Local publish and consume only (no remote access)
 
-After downloading and unzipping the binaries, run the following command to run the `simple-streaming-server` on your hosted server:
-
+When starting `simple-streaming-server`, run the following command:
 ```
-./livepeer-linux-amd64/livepeer \ 
-        -broadcaster
-        -rtmpAddr 0.0.0.0:1935
+./livepeer \ 
+        -broadcaster \
+        -rtmpAddr 127.0.0.1:1935 \
+        -httpAddr 127.0.0.1:8935
+```
+_Note: this command is technically equivalent to running the same command without `-rtmpAddr` or `-httpAddr` flags, as these are the default options. They are explicitly included here for illustrative purposes only._
+
+`simple-streaming-server` will _only allow content to be published and consumed on the hosted server itself_:
+
+|        | publish | consume |
+|--------|:-------:|:-------:|
+| local  |   yes   |   yes   |
+| remote |    no   |    no   |
+
+#### Local publish, Remote consume
+
+When starting `simple-streaming-server`, run the following command:
+```
+./livepeer \ 
+        -broadcaster \
+        -rtmpAddr 127.0.0.1:1935 \
+        -httpAddr 0.0.0.0:8935
+```
+This will _only allow content to be published from the hosted server itself_ but will _allow content to be consumed locally or remotely_, by any host with network access to the hosted server.
+
+|        | publish | consume |
+|--------|:-------:|:-------:|
+| local  |   yes   |   yes   |
+| remote |    no   |   yes   |
+
+#### Remote publish and consume (full remote access)
+
+|        | publish | consume |
+|--------|:-------:|:-------:|
+| local  |   yes   |   yes   |
+| remote |   yes   |   yes   |
+
+When starting `simple-streaming-server`, run the following command:
+```
+./livepeer \ 
+        -broadcaster \
+        -rtmpAddr 0.0.0.0:1935 \
         -httpAddr 0.0.0.0:8935
 ```
 
-You can now publish content to, and request content to be served from, the `simple-streaming-server`.
+This will _allow content to be published and / or consumed remotely_, by any host with network access to the hosted server.
 
-Note, you will need to use the hosted server's public IP address, instead of `127.0.0.1`, when using `ffmpeg`, `ffplay`, **OBS Studio** or **VLC Player**.
+Note: when publishing or consuming content from a remote host, the server's IP address must be used instead of `127.0.0.1`
+Note: you may need to open ports `1935` and `8935` in your server's firewall configuration in order to allow internet access.
 
-### Security
+## Architecture Summary
 
-In the event that you want to restrict access to publishing content into the `simple-streaming-server`, you can restart the application with the following command:
+This section provides a high level summary of the logical and functional architecture of a `simple-streaming-server`.
 
-```
-./livepeer-linux-amd64/livepeer \ 
-        -broadcaster
-        -rtmpAddr 127.0.0.1:1935
-        -httpAddr 0.0.0.0:8935
-```
+![image](https://user-images.githubusercontent.com/2212651/80694236-d72ca480-8af1-11ea-9498-f270796af5b8.png)
 
-The `simple-streaming-server` will now only accept content published from the hosted server itself, perhaps as a test signal, or streaming recorded content.
+Content can be published to `simple-streaming-server` via `RTMP` to port `1935`.
 
-
-## Platform Overview
-
-Video content to be published to, and requested from `simple-streaming-server`
-
-![image](https://user-images.githubusercontent.com/2212651/79838698-0300a980-83d1-11ea-8ea8-b3d3022e065b.png)
-
-Content can be streamed to `rtmp://127.0.0.1:1935/streamID` to publish.
-
-Content can be requested from `http://127.0.0.1:8935/stream/streamID` for playback.
+Content can be consumed by requesting a URL with `.m3u8` extension, via `http` from port `8935`. `simple-streaming-server` will respond by serving a sequence of content segment files with `.hs` extensions over `http`, for playback.
 
 ## Transcoding
 
-Your `simple-streaming-server` currently is able to serve content in the "source" format that it was published in. That is to say, that if you stream in e.g. `1920x1080` (Full HD), then the consumer will only be able to watch in `1920x1080`.
+`simple-streaming-server` can be configured to transcode the source content into different frame sizes and frame rates.
 
-Livepeer's software also allows you to maximise the accessibility of streaming content. It does this by Transcoding, or "shrinking" the content into "lighter" formats.
+Transcoding allows content to be consumed by devices with less performant network connections (bytes per second).
 
-These "lighter" formats have the following advantages for consumers of A/V content:
+### Local Transcoding
 
-- __Faster load time__ - the stream starts straight away, because less data is required (up to 900x less)
-- __Works on slower internet connections__ - due to less data required to be received (e.g. can work on 2G, 3G, 3.5G)
-- __Works on older devices__ - as it requires less power to play back content (e.g. on old smartphones)
+![image](https://user-images.githubusercontent.com/2212651/80705206-a8b7c500-8b03-11ea-8c51-a5892ef577fa.png)
 
-To include Transcoding, see [videoDAC's Streaming Back-End repository](https://github.com/videoDAC/streaming-back-end).
+Transcoding can be performed on the same computer / server running the `simple-streaming-server`.
 
-![image](https://user-images.githubusercontent.com/59374467/78892333-d40c3e80-7a86-11ea-8823-5b90dc9055e1.png)
+1. Open a `Terminal`, and run the following command from the folder containing `livepeer` binary:
+```
+./livepeer \
+        -broadcaster \
+        -orchAddr 127.0.0.1:8936 \
+        -transcodingOptions P144p30fps16x9,P240p30fps16x9 \
+        -v 99
+```
+  - `-orchAddr` specifies the location of the Orchestrator / Transcoder service on the network
+  - `-transcodingOptions` specifies frame sizes and frame rates to be transcoded into.
+  - `-v 99` is the highest level of logging output.
 
-## Customise the code
+2. Open another `Terminal`, and run the following command from the folder containing `livepeer` binary:
+```
+./livepeer \
+        -orchestrator \
+        -transcoder \
+        -serviceAddr 127.0.0.1:8936 \
+        -cliAddr 127.0.0.1:7936 \
+        -v 99
+```
+  - `-orchestrator` and `-transcoder` tell the software to run in Orchestrator and Transcoder modes
+  - `-serviceAddr` specifies the IP address and port that this service should run on the network
+  - `-v 99` is the highest level of logging output.
 
-`simple-streaming-server` uses software from [Livepeer](https://github.com/livepeer) project.
+**`simple-streaming-server` is now running with Local Transcoding enabled.**
 
-Livepeer is an open-source project and accepts contributions in the form of Pull Requests and Issues.
+3. [Inspect the content metadata](#inspect-content-metadata) to see the additional streams available for consumption:
 
-You can talk to other members of the community on [Livepeer Community Discord channel](https://discord.gg/RR4kFAh).
+![image](https://user-images.githubusercontent.com/2212651/80700605-9cc80500-8afb-11ea-9ef4-b041b7f39a55.png)
+
+Note: many players of streaming content will dynamically switch between available streams in order to optimise the quality of playback given the available bandwidth.
+
+### Distributed Transcoding
+
+![Screenshot from 2020-04-30 16-58-19](https://user-images.githubusercontent.com/2212651/80705292-cf75fb80-8b03-11ea-8285-43a2a0dd7596.png)
+
+Transcoding activities can also be distributed across an Orchestrator, and one or more Transcoders.
+
+1. Open a `Terminal`, and run the following command from the folder containing `livepeer` binary:
+```
+./livepeer \
+        -broadcaster \
+        -orchAddr 127.0.0.1:8936 \
+        -transcodingOptions P144p30fps16x9,P240p30fps16x9 \
+        -v 99
+```
+
+2. Open another `Terminal`, and run the following command from the folder containing `livepeer` binary:
+```
+./livepeer \
+        -orchestrator \
+        -orchSecret pineapple \
+        -serviceAddr 127.0.0.1:8936 \
+        -cliAddr 127.0.0.1:7936 \
+        -v 99
+```
+  - `-orchSecret` is a way for this Orchestrator to allow Transcoders to authenticate
+
+3. Open another `Terminal`, and run the following command from the folder containing `livepeer` binary:
+```
+./livepeer \
+        -transcoder \
+        -orchSecret pineapple \
+        -orchAddr 127.0.0.1:8936 \
+        -v 99
+```
+
+**`simple-streaming-server` is now running with (Local) Distributed Transcoding enabled.**
+
+### Remote Transcoding
+
+Transcoding can also be performed on a different computer / server from the `simple-streaming-server`.
+
+For this you will need two hosts (computers / servers):
+
+- For the `simple-streaming-server`
+  - This host will need to be able to connect to port `8936` on the host of the remote transcoder.
+- For the remote transcoder
+
+1. Open a `Terminal` on the remote transcoder host, and run the following command:
+```
+./livepeer \
+        -broadcaster \
+        -orchAddr 192.168.2.113:8936 \
+        -transcodingOptions P144p30fps16x9,P240p30fps16x9 \
+        -v 99
+```
+  - `192.168.2.113` is the IP address of the remote transcoder host
+
+2. Open a `Terminal` on the `simple-streaming-server` host, and run the following command:
+```
+./livepeer \
+        -orchestrator \
+        -transcoder \
+        -serviceAddr 192.168.2.113:8936 \
+        -cliAddr 127.0.0.1:7936 \
+        -v 99
+```
+  - `192.168.2.113` is the IP address of the remote transcoder host
+
+**`simple-streaming-server` is now running with Remote Transcoding enabled.**
+
+### Outsourced Transcoding (requires payment in Ethereum)
+
+Transcoding services can be purchased directly from Orchestrators operating in Livepeer's public Transcoding Marketplace.
+
+Services can be paid for on a pay-as-you-go basis using Ethereum, without any minimum contractual obligation.
+
+1. Install `geth`, which is [client software to run Ethereum, released by Ethereum Foundation](https://geth.ethereum.org/docs/install-and-build/installing-geth).
+
+- This client software can be used to sync Ethereum blockchain, and to broadcast transactions to be included in the blockchain.
+
+2. Open a `Terminal` and run the following command to run `geth` client
+```
+geth -rpc -rpcapi eth,net,web3 --syncmode "light"
+```
+
+3. Wait until `geth` has imported all new block headers, and has started downloading 1 block at a time:
+
+![image](https://user-images.githubusercontent.com/2212651/80710566-968e5480-8b0c-11ea-81b8-f0efd19fa875.png)
+
+4. Open another `Terminal` and run the following command:
+```
+./livepeer \
+        -broadcaster \
+        -network mainnet \
+        -transcodingOptions P144p30fps16x9,P240p30fps16x9 \
+        -ethUrl http://127.0.0.1:8545 \
+        -pixelsPerUnit 1 \
+        -maxPricePerUnit 1 \
+        -v 99
+```
+  - `mainnet` signifies Ethereum's main network
+  - `-ethUrl` is the network location of the `geth` service.
+  - `-pixelsPerUnit` and `-maxPricePerUnit` are for setting the maximum price to be paid for Transcoding
+
+5. Enter a Passphrase twice:
+
+![image](https://user-images.githubusercontent.com/2212651/80711420-f20d1200-8b0d-11ea-9f30-c33c4f80de06.png)
+
+Note: no characters will appear in the window when typing the passphrase.
+
+The Passphrase will be used to encrypt the Private Key generated by this process. The Private Key will be used to sign transactions for publishing on Ethereum.
+
+6. Enter the Passphrase again to start the `simple-streaming-server`.
+
+7. Wait until the text `CLI server listening on 127.0.0.1:7935` is displayed in the console:
+
+![image](https://user-images.githubusercontent.com/2212651/80712819-24b80a00-8b10-11ea-987f-6cee6a29bc52.png)
+
+8. Open a `Terminal`, and run the following command from the folder containing `livepeer_cli` binary:
+```
+./livepeer_cli
+```
+
+9. Send some ETH from your wallet to the `ETH Account` listed under `NODE STATS`.
+
+10. In `livepeer_cli`, run option `12. Invoke "deposit broadcasting funds" (ETH)`
+
+![image](https://user-images.githubusercontent.com/2212651/80714073-081cd180-8b12-11ea-8fc4-070282141905.png)
+
+This command will deposit some ETH into a smart contract in Livepeer's protocol, which can be spent on Transcoding services.
+
+11. Enter the amount of ETH you would like to deposit into the contract.
+
+12. Enter the amount of ETH you would like to keep in reserve in the contract.
+
+**`simple-streaming-server` is now running with Outsourced Transcoding on Livepeer, with payment on Ethereum.**
+
+Further details on setting the maximum price to be paid for Transcoding can be found in [Livepeer's Broadcaster documentation](https://livepeer.readthedocs.io/en/latest/broadcasting.html).
+
+To find out more about Livepeer, go to this [10-minute primer](https://livepeer.org/primer/).
