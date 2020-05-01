@@ -1,5 +1,15 @@
 # `simple-streaming-server`
 
+This page gives an introduction to `simple-streaming-server`.
+
+It will start by explaining what it is, and what is does. Then, it will give you instructions for running a minimum instance of `simple-streaming-server`.
+
+This document is reviewed regularly, with the objective of helping the reader to run `simple-streaming-server` with as little complexity as possible.
+
+[Skip to the instructions for running a `simple-streaming-server`](#minimum-setup).
+
+## What is it?
+
 `simple-streaming-server` is an application for streaming content, running on a computer / server.
 
 The streaming content must be Video + Audio, and can be either live streaming content (e.g. from camera and microphone), or pre-recorded streaming content (e.g. from a file on disk).
