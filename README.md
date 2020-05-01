@@ -553,3 +553,7 @@ This section will describe how to configure the `-transcoder` process to use a G
 ### Content Distribution Network
 
 This section will describe how to configure a commercial Content Distribution Network (CDN), such as Amazon CloudFront, Cloudflare or Akamai. This is required in order to be able to serve content to large numbers of viewers simultaneously.
+
+### IP Address Whitelisting
+
+This section will explain how to configure `simple-streaming-server` to only allow publishing and consuming from specific whitelisted IP addresses.
