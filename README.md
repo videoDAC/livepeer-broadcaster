@@ -299,11 +299,6 @@ This will _only allow content to be published from the hosted server itself_ but
 
 #### Remote publish and consume (full remote access)
 
-|        | publish | consume |
-|--------|:-------:|:-------:|
-| local  |   yes   |   yes   |
-| remote |   yes   |   yes   |
-
 When starting `simple-streaming-server`, run the following command:
 ```
 ./livepeer \ 
@@ -313,6 +308,11 @@ When starting `simple-streaming-server`, run the following command:
 ```
 
 This will _allow content to be published and / or consumed remotely_, by any host with network access to the hosted server.
+
+|        | publish | consume |
+|--------|:-------:|:-------:|
+| local  |   yes   |   yes   |
+| remote |   yes   |   yes   |
 
 Note: when publishing or consuming content from a remote host, the server's IP address must be used instead of `127.0.0.1`
 Note: you may need to open ports `1935` and `8935` in your server's firewall configuration in order to allow internet access.
