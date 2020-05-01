@@ -70,6 +70,8 @@ Now that `simple-streaming-server` is running, here are some further things you 
 
 - [Take a look at the roadmap for simple-streaming-server](#roadmap).
 
+- [Download the source code and compile your own binaries](https://github.com/livepeer/go-livepeer/blob/master/doc/install.md)
+
 ## Publish and Consume Content
 
 This section explains how to publish and consume content to and from `simple-streaming-server`.
