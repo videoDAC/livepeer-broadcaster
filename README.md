@@ -60,17 +60,19 @@ Here are instructions to setup a `simple-streaming-server` on a local computer. 
 
 Now that `simple-streaming-server` is running, here are some further things you can do:
 
-- [Publish content to, and consume content from `simple-streaming-server`](#publish-and-consume-content),
+- [**Publish** and **Consume** content to and from `simple-streaming-server`](#publish-and-consume-content),
 
-- [Learn more about how `simple-streaming-server` works](#architecture-summary),
+- [**Learn** more about how `simple-streaming-server` works](#architecture-summary),
 
-- [Create a hosted instance of `simple-streaming-server`](#hosted-setup),
+- [**Add** Transcoding to increase accessibility of streaming content](#transcoding),
 
-- [Add a Transcoding service to increase accessibility of streaming content](#transcoding),
+- [**Configure** `simpler-streaming-server` to start on system boot](#start-on-system-boot),
 
-- [Take a look at the roadmap for simple-streaming-server](#roadmap).
+- [**Build** a hosted instance of `simple-streaming-server`](#hosted-setup),
 
-- [Download the source code and compile your own binaries](https://github.com/livepeer/go-livepeer/blob/master/doc/install.md)
+- [**Learn** about roadmap for simple-streaming-server](#roadmap).
+
+- [**Build** from source code and contribute to development](https://github.com/livepeer/go-livepeer/blob/master/doc/install.md)
 
 ## Publish and Consume Content
 
@@ -374,7 +376,7 @@ Transcoding can be performed on the same computer / server running the `simple-s
 
 Note: many players of streaming content will dynamically switch between available streams in order to optimise the quality of playback given the available bandwidth.
 
-### Distributed Transcoding
+### Local Distributed Transcoding
 
 ![Screenshot from 2020-04-30 16-58-19](https://user-images.githubusercontent.com/2212651/80705292-cf75fb80-8b03-11ea-8285-43a2a0dd7596.png)
 
@@ -408,8 +410,6 @@ Transcoding activities can also be distributed across an Orchestrator, and one o
         -orchAddr 127.0.0.1:8936 \
         -v 99
 ```
-
-Note: to add more capacity
 
 **`simple-streaming-server` is now running with (Local) Distributed Transcoding enabled.**
 
@@ -516,6 +516,101 @@ This command will deposit some ETH into a smart contract in Livepeer's protocol,
 Further details on setting the maximum price to be paid for Transcoding can be found in [Livepeer's Broadcaster documentation](https://livepeer.readthedocs.io/en/latest/broadcasting.html).
 
 To find out more about Livepeer, go to this [10-minute primer](https://livepeer.org/primer/).
+
+## Start on system boot
+
+This section explains how to configure `simple-streaming-server` to start when the underlying system starts.
+
+The instructions use `systemd` on Linux (Ubuntu), and require root / `sudo` access. 
+
+### `simple-streaming-server.service`
+
+0. Ensure the `simple-streaming-server` has been [downloaded and installed on the underlying system](#minimum-setup)
+
+1. Run the following commands to fetch a `simple-streaming-server.service` file from `/etc/systemd/system` folder
+```
+cd /etc/systemd/system
+sudo wget https://raw.githubusercontent.com/videoDAC/simple-streaming-server/master/systemd/simple-streaming-server.service
+```
+
+2. Run the following commands to enable and start `simple-streaming-server.service`:
+```
+sudo systemctl enable simple-streaming-server.service
+sudo systemctl start simple-streaming-server.service
+```
+
+**`simple-streaming-server` is now running.**
+
+3. Run the following command to tail the logs:
+```
+sudo journalctl -f --unit=simple-streaming-server.service
+```
+
+### `publish-test-source.service`
+
+0. Ensure the `FFmpeg` has been [downloaded and installed on the underlying system](#minimum-setup)
+
+1. Run the following commands to fetch a `publish-test-source.service` file from `/etc/systemd/system` folder
+```
+cd /etc/systemd/system
+sudo wget https://raw.githubusercontent.com/videoDAC/simple-streaming-server/master/systemd/publish-test-source.service
+```
+
+2. Run the following commands to enable and start `simple-streaming-server.service`:
+```
+sudo systemctl enable publish-test-source.service
+sudo systemctl start publish-test-source.service
+```
+
+**`simple-streaming-server` is now running with a test source being published into it.**
+
+3. Run the following command to tail the logs:
+```
+sudo journalctl -f --unit=publish-test-source.service
+```
+
+4. Run `curl http://0.0.0.0:8935/stream/hello_world.m3u8` to see
+```
+#EXTM3U
+#EXT-X-VERSION:3
+#EXT-X-STREAM-INF:PROGRAM-ID=0,BANDWIDTH=4000000,RESOLUTION=1000x1000
+hello_world/source.m3u8
+```
+
+### `local-transcoding.service`
+
+0. Ensure the `simple-streaming-server` has been [downloaded and installed on the underlying system](#minimum-setup)
+
+1. Run the following commands to fetch a `simple-streaming-server.service` file from `/etc/systemd/system` folder
+```
+cd /etc/systemd/system
+sudo wget https://raw.githubusercontent.com/videoDAC/simple-streaming-server/master/systemd/local-transcoding.service
+```
+
+2. Run the following commands to enable and start `local-transcoding.service`:
+```
+sudo systemctl enable local-transcoding.service
+sudo systemctl start local-transcoding.service
+```
+
+**`simple-streaming-server` is now running with local transcoding service.**
+
+3. Run the following command to tail the logs:
+```
+sudo journalctl -f --unit=local-transcoding.service
+```
+
+4. Ensure `publish-test-source.service` is running, then run `curl http://0.0.0.0:8935/stream/hello_world.m3u8` to see
+```
+#EXTM3U
+#EXT-X-VERSION:3
+#EXT-X-STREAM-INF:PROGRAM-ID=0,BANDWIDTH=4000000,RESOLUTION=1000x1000
+hello_world/source.m3u8
+#EXT-X-STREAM-INF:PROGRAM-ID=0,BANDWIDTH=400000,RESOLUTION=256x144
+hello_world/P144p30fps16x9.m3u8
+#EXT-X-STREAM-INF:PROGRAM-ID=0,BANDWIDTH=600000,RESOLUTION=426x240
+hello_world/P240p30fps16x9.m3u8
+```
 
 ## Roadmap
 
