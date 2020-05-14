@@ -1,0 +1,14 @@
+[Unit]
+Description=service to start the Local Transcoding ("Orchestrator / Transcoder") service per https://github.com/videoDAC/simple-streaming-server/blob/master/README.md#local-transcoding
+After=network.target
+
+[Service]
+User=ubuntu
+Type=simple
+Restart=always
+RestartSec=1s
+WorkingDirectory=/home/ubuntu/livepeer-linux-amd64
+ExecStart=/home/ubuntu/livepeer-linux-amd64/livepeer -orchestrator -transcoder -serviceAddr 127.0.0.1:8936 -cliAddr 127.0.0.1:7836 -v 99
+
+[Install]
+WantedBy=default.target
