@@ -1,24 +1,36 @@
 # `simple-streaming-server`
 
+## Contents
+
+- [Introduction](#introduction)
+- [What is it, and what does it do?](#what-is-it,-and-what-does-it-do??)
+- [Minimum Setup](#minimum-setup)
+- [Publish and Consume Content](#publish-and-consume-content)
+- [Architecture Summary](#architecture-summary)
+- [Transcoding](#transcoding)
+- [Hosted Setup](#hosted-setup)
+- [Start on System Boot](#start-on-system-boot)
+- [Roadmap](#roadmap).
+
+## Introduction
+
 This page gives an introduction to `simple-streaming-server`.
 
-It will start by explaining what it is, and what is does. Then, it will give you instructions for running a minimum instance of `simple-streaming-server`.
+The main objective is to help you install `simple-streaming-server` on a computer.
 
-This document is reviewed regularly, with the objective of helping the reader to run `simple-streaming-server` with as little complexity as possible.
+It will also help you to operate `simple-streaming-server`.
 
-[Skip to the instructions for running a `simple-streaming-server`](#minimum-setup).
+This repo is published under [MIT License](https://github.com/videoDAC/simple-streaming-server/blob/master/LICENSE).
 
-## What is it?
+## What is it, and what does it do??
 
-`simple-streaming-server` is an application for streaming content, running on a computer / server.
+`simple-streaming-server` is software to run on a computer or a server. It uses entirely open-source and freely available software, and makes extensive use of [Livepeer's open-source video infrastructure software](https://github.com/livepeer).
 
-The streaming content must be Video + Audio, and can be either live streaming content (e.g. from camera and microphone), or pre-recorded streaming content (e.g. from a file on disk).
+A `simple-streaming-server` can **receive** and **serve** streaming content. It can also be configured to transcode streaming content to improve accessibility.
 
-It uses Livepeer's open-source software, and does not cost any cryptocurrency or require any awareness of blockchain. All software used in this guide is open-source.
+The streaming content must be Video + Audio, and must be published into the `simple-streaming-server` in a linear stream. 
 
-## What does it do?
-
-A `simple-streaming-server` can **receive** and **serve** streaming content.
+This stream of content can be live (from camera and microphone) or recorded (from a disk).
 
 ![image](https://user-images.githubusercontent.com/2212651/80460726-dd841a80-8951-11ea-9556-391153100058.png)
 
@@ -30,7 +42,7 @@ It can **serve** streaming content over `http` with a `.m3u8` extension, for pla
 
 Here are instructions to setup a `simple-streaming-server` on a local computer. They will work on Mac or Linux (Ubuntu). 
 
-1. Download the latest release of pre-compiled software from [Livepeer's Release Page](https://github.com/livepeer/go-livepeer/releases), under where it says `Assets`:
+1. Download the latest release of pre-compiled software from [Livepeer's Release Page on Github](https://github.com/livepeer/go-livepeer/releases), under where it says **Assets**:
 
 - On a Mac, download the `livepeer-darwin-amd64.tar.gz` file to the _Downloads_ folder
 
@@ -66,9 +78,9 @@ Now that `simple-streaming-server` is running, here are some further things you 
 
 - [**Add** Transcoding to increase accessibility of streaming content](#transcoding),
 
-- [**Configure** `simpler-streaming-server` to start on system boot](#start-on-system-boot),
-
 - [**Build** a hosted instance of `simple-streaming-server`](#hosted-setup),
+
+- [**Configure** `simpler-streaming-server` to start on system boot](#start-on-system-boot),
 
 - [**Learn** about roadmap for simple-streaming-server](#roadmap).
 
