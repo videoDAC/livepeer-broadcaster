@@ -24,7 +24,7 @@ A `simple-streaming-server` can **receive** and **serve** streaming content.
 
 It can **receive** streaming content published in `RTMP` format, from tools like [OBS Studio](https://obsproject.com/), [ManyCam](https://manycam.com/), [FFmpeg](https://www.ffmpeg.org/), or many other tools.
 
-It can **serve** streaming content over `http` with a `.m3u8` extension, for playback in tools like [VLC Media Player](https://www.videolan.org/vlc/index.html), media-enabled Mobile browsers (Brave, Firefox or Chrome), embedded in an `html` page using a stream player such as `hls.js`, or inside a mobile application.
+It can **serve** streaming content over `http` with a `.m3u8` extension, for playback in tools like [VLC Media Player](https://www.videolan.org/vlc/index.html), media-enabled Mobile browsers (Brave, Firefox or Chrome), embedded in an `html` page using a stream player such as `hls.js`, or inside a mobile application using something like [ExoPlayer](https://exoplayer.dev/).
 
 ## Minimum Setup
 
@@ -40,9 +40,9 @@ Here are instructions to setup a `simple-streaming-server` on a local computer. 
 
 - On Mac, simply open the file, and it will extract to the folder containing the file (_Downloads_).
 
-- On Linux (Ubuntu), simply open the `livepeer-darwin-amd64.tar.gz` file then click "Extract", and extract it to "Home".
+- On Linux (Ubuntu), open the `livepeer-darwin-amd64.tar.gz` file then click "Extract", and extract it to "Home".
 
-3. Open `Terminal`, and navigate to the folder containig the `livepeer` binary:
+3. Open `Terminal`, and navigate to the folder containing the `livepeer` binary:
 
 - On Mac, run `cd Downloads/livepeer-darwin-amd64`
 
@@ -652,3 +652,6 @@ This section will describe how to configure a commercial Content Distribution Ne
 ### IP Address Whitelisting
 
 This section will explain how to configure `simple-streaming-server` to only allow publishing and consuming from specific whitelisted IP addresses.
+
+### Raspberry Pi
+
