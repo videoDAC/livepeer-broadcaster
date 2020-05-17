@@ -558,6 +558,8 @@ sudo systemctl start simple-streaming-server.service
 sudo journalctl -f --unit=simple-streaming-server.service
 ```
 
+Note: by default, the `simple-streaming-server` will only accept inbound `rtmp` content and serve outbound `http` content _from and to localhost_ (`127.0.0.1`). To open ports to remote hosts, change the corresponding configuration to `0.0.0.0` and run `sudo systemctl daemon-reload`, then `sudo systemctl restart simple-streaming-server.service`.
+
 ### `publish-test-source.service`
 
 0. Ensure the `FFmpeg` has been [downloaded and installed on the underlying system](#minimum-setup)
@@ -574,7 +576,7 @@ sudo systemctl enable publish-test-source.service
 sudo systemctl start publish-test-source.service
 ```
 
-**`simple-streaming-server` is now running with a test source being published into it.**
+**a test source is now being published into `simple-streaming-server`**
 
 3. Run the following command to tail the logs:
 ```
