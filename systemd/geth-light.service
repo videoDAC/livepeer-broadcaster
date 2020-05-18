@@ -1,0 +1,15 @@
+[Unit]
+Description=service to a "light" geth node, to communicate with the Ethereum blockchain.
+After=network.target
+
+[Service]
+User=ubuntu
+Type=simple
+Restart=always
+RestartSec=1s
+WorkingDirectory=/home/ubuntu/
+ExecStart=/home/ubuntu/ethereum/geth -rpc -rpcapi eth,net,web3 --syncmode "light"
+
+[Install]
+WantedBy=default.target
+
