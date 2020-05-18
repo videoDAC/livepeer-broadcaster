@@ -626,6 +626,29 @@ hello_world/P144p30fps16x9.m3u8
 hello_world/P240p30fps16x9.m3u8
 ```
 
+### `geth-light.service`
+
+0. Ensure the `geth` binary is in `/home/ubuntu/ethereum`
+
+1. Run the following commands to fetch a `geth-light.service` file, from `/etc/systemd/system` folder
+```
+cd /etc/systemd/system
+sudo wget https://raw.githubusercontent.com/videoDAC/simple-streaming-server/master/systemd/geth-light.service
+```
+
+2. Run the following commands to enable and start `geth-light.service`:
+```
+sudo systemctl enable geth-light.service
+sudo systemctl start geth-light.service
+```
+
+**`simple-streaming-server` is now running.**
+
+3. Run the following command to tail the logs:
+```
+sudo journalctl -f --unit=geth-light.service
+```
+
 ## Roadmap
 
 This section describes additional features to be defined as part of this guide.
@@ -669,3 +692,4 @@ This section will explain how to configure `simple-streaming-server` to only all
 
 ### Raspberry Pi
 
+This section will seek to add instructions for running `simple-streaming-server` on a Raspberry Pi.
