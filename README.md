@@ -460,9 +460,9 @@ For this you will need two hosts (computers / servers):
 
 ### Outsourced Transcoding (requires payment in Ethereum)
 
-Transcoding services can be purchased directly from Orchestrators operating in Livepeer's public Transcoding Marketplace.
+Transcoding services can be purchased directly from individual Orchestrators operating in Livepeer's public Transcoding Marketplace.
 
-Services can be paid for on a pay-as-you-go basis using Ethereum, without any minimum contractual obligation.
+Services are provide on a pay-as-you-go basis using Ethereum, without any minimum contractual obligation.
 
 1. Install `geth`, which is [client software to run Ethereum, released by Ethereum Foundation](https://geth.ethereum.org/docs/install-and-build/installing-geth).
 
@@ -521,9 +521,11 @@ This command will deposit some ETH into a smart contract in Livepeer's protocol,
 
 11. Enter the amount of ETH you would like to deposit into the contract.
 
-12. Enter the amount of ETH you would like to keep in reserve in the contract.
+12. Enter the amount of ETH you would like to keep in reserve in the contract, and press return.
 
 **`simple-streaming-server` is now running with Outsourced Transcoding on Livepeer, with payment on Ethereum.**
+
+You can now stream content into `simple-streaming-server`, and observe that your content is being transcoded into different formats.
 
 Further details on setting the maximum price to be paid for Transcoding can be found in [Livepeer's Broadcaster documentation](https://livepeer.readthedocs.io/en/latest/broadcasting.html).
 
@@ -642,7 +644,7 @@ sudo systemctl enable geth-light.service
 sudo systemctl start geth-light.service
 ```
 
-**`simple-streaming-server` is now running.**
+**`geth-light` is now running, allowing `simple-streaming-server` to connect to Ethereum.**
 
 3. Run the following command to tail the logs:
 ```
