@@ -585,12 +585,12 @@ sudo systemctl start publish-test-source.service
 sudo journalctl -f --unit=publish-test-source.service
 ```
 
-4. Run `curl http://0.0.0.0:8935/stream/hello_world.m3u8` to see
+4. Run `curl http://0.0.0.0:8935/stream/hello_consumer.m3u8` to see
 ```
 #EXTM3U
 #EXT-X-VERSION:3
 #EXT-X-STREAM-INF:PROGRAM-ID=0,BANDWIDTH=4000000,RESOLUTION=1000x1000
-hello_world/source.m3u8
+hello_consumer/source.m3u8
 ```
 
 ### `local-transcoding.service`
@@ -616,16 +616,16 @@ sudo systemctl start local-transcoding.service
 sudo journalctl -f --unit=local-transcoding.service
 ```
 
-4. Ensure `publish-test-source.service` is running, then run `curl http://0.0.0.0:8935/stream/hello_world.m3u8` to see
+4. Ensure `publish-test-source.service` is running, then run `curl http://0.0.0.0:8935/stream/hello_consumer.m3u8` to see
 ```
 #EXTM3U
 #EXT-X-VERSION:3
 #EXT-X-STREAM-INF:PROGRAM-ID=0,BANDWIDTH=4000000,RESOLUTION=1000x1000
-hello_world/source.m3u8
+hello_consumer/source.m3u8
 #EXT-X-STREAM-INF:PROGRAM-ID=0,BANDWIDTH=400000,RESOLUTION=256x144
-hello_world/P144p30fps16x9.m3u8
+hello_consumer/P144p30fps16x9.m3u8
 #EXT-X-STREAM-INF:PROGRAM-ID=0,BANDWIDTH=600000,RESOLUTION=426x240
-hello_world/P240p30fps16x9.m3u8
+hello_consumer/P240p30fps16x9.m3u8
 ```
 
 ### `geth-light.service`
