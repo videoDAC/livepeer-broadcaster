@@ -8,7 +8,7 @@ Type=simple
 Restart=always
 RestartSec=1s
 WorkingDirectory=/home/ubuntu/
-ExecStart=/usr/bin/ffmpeg -re -f lavfi -i testsrc=size=1000x1000:rate=30,format=yuv420p -f lavfi -i sine -c:v libx264 -b:v 1000k -x264-params keyint=60 -c:a aac -f flv rtmp://127.0.0.1:1935/hello_world
+ExecStart=/usr/bin/ffmpeg -re -f lavfi -i testsrc=size=1000x1000:rate=30,format=yuv420p -f lavfi -i sine -c:v libx264 -b:v 1000k -x264-params keyint=60 -c:a aac -f flv rtmp://127.0.0.1:1935/hello_consumer
 
 [Install]
 WantedBy=default.target
