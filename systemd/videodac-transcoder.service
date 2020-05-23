@@ -1,0 +1,14 @@
+[Unit]
+Description=service to start a Transcoder on your local computer, to provide capacity to support videoDAC's Orchestrator on Mainnet.
+After=network.target
+
+[Service]
+User=ubuntu
+Type=simple
+Restart=always
+RestartSec=1s
+WorkingDirectory=/home/ubuntu/livepeer-linux-amd64
+ExecStart=/home/ubuntu/livepeer-linux-amd64/livepeer -transcoder -orchAddr 54.93.169.248:8935 -orchSecret mango
+
+[Install]
+WantedBy=default.target
