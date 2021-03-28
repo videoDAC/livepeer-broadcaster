@@ -1,17 +1,5 @@
 # Livepeer Broadcaster
 
-## Contents
-
-- [Introduction](#introduction)
-- [What is it, and what does it do?](#overview)
-- [Minimum Setup](#minimum-setup)
-- [Publish and Consume Content](#publish-and-consume-content)
-- [Architecture Summary](#architecture-summary)
-- [Transcoding](#transcoding)
-- [Hosted Setup](#hosted-setup)
-- [Start on System Boot](#start-on-system-boot)
-- [Roadmap](#roadmap).
-
 ## Introduction
 
 This page gives an introduction to Livepeer Broadcaster.
