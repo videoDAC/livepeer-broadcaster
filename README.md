@@ -54,16 +54,14 @@ Here are instructions to setup a Livepeer Broadcaster on a local computer. They 
 
 Now that Livepeer Broadcaster is running, here are some further things you can do:
 
-- [**Publish** and **Consume** content to and from Livepeer Broadcaster](#publish-and-consume-content),
+- [Publish to, and Consume from a Livepeer Broadcaster](./publish-and-consume-content.md)
 
-- [**Learn** more about how Livepeer Broadcaster works](#architecture-summary),
+- [Learn more about how Livepeer Broadcaster works](./architecture-summary.md)
 
-- [**Add** Transcoding to increase accessibility of streaming content](#transcoding),
+- [Add Transcoding to increase accessibility of streaming content](./transcoding.md)
 
-- [**Build** a hosted instance of Livepeer Broadcaster](#hosted-setup),
+- [Build a hosted instance of Livepeer Broadcaster](./hosted-setup.md)
 
-- [**Configure** Livepeer Broadcaster to start on system boot](#start-on-system-boot),
+- [Configure Livepeer Broadcaster to start on system boot](./start-on-system-boot.md)
 
-- [**Learn** about roadmap for Livepeer Broadcaster](#roadmap).
-
-- [**Build** from source code and contribute to development](https://github.com/livepeer/go-livepeer/blob/master/doc/install.md)
+- [Build from source code](https://github.com/livepeer/go-livepeer/blob/master/doc/install.md)
