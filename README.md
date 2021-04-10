@@ -4,6 +4,8 @@
 
 This page gives an introduction to Livepeer Broadcaster.
 
+[Livepeer](https://livepeer.org) is a project to create a decentralised public network providing video infrastructure services, based on open-source software. [(Livepeer on github)](https://github.com/livepeer/), [(Livepeer Primer)](https://livepeer.org/primer).
+
 The main objective is to help you install and operate a Broadcaster on a computer, and to learn how to interact with it.
 
 ## Overview
