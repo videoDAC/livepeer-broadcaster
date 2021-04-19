@@ -1,3 +1,10 @@
+Contents:
+
+- [Publish content via CLI (`ffmpeg`)](#command-line-interface)
+- [Consume content via CLI (`ffplay`)](#consume-content-using-ffplay)
+- [Publish content via GUI (_OBS Studio_)](#command-line-interface)
+- [Consume content via GUI (_VLC Player_)](#consume-content-using-ffplay)
+
 ## Publish and Consume Content
 
 This section explains how to publish and consume content to and from Livepeer Broadcaster.
