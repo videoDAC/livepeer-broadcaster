@@ -1,8 +1,19 @@
-## Transcoding
+Contents:
 
-Livepeer Broadcaster can be configured to transcode the source content into different frame sizes and frame rates.
+- [Transcoding Overview](#transcoding-overview)
+- [Local Transcoding](#local-transcoding)
+- [Local Distributed Transcoding](#local-distributed-transcoding)
+- [Remote Transcoding](#remote-transcoding)
+- [Outsourced Transcoding (requires payment in ETH)](#outsourced-transcoding)
+
+### Transcoding Overview
+
+Livepeer Broadcaster can be configured to request that source video content be resized (transcoded) into different frame sizes and frame rates.
 
 Transcoding allows content to be consumed by devices with less-performant network connections (bytes per second).
+
+![Vector_Video_Standards8](https://user-images.githubusercontent.com/2212651/115254515-0b5a0480-a14b-11eb-97de-5b9b8f2fa3e0.png)
+This chart shows the most common display resolutions, 16:9 formats shown in blue. [source: Wikipedia](https://en.wikipedia.org/wiki/1080p#/media/File:Vector_Video_Standards8.svg)
 
 [Return to main page](./README.md#next-steps)
 
@@ -121,11 +132,11 @@ For this you will need two hosts (computers / servers):
 
 [Return to main page](./README.md#next-steps)
 
-### Outsourced Transcoding (requires payment in Ethereum)
+### Outsourced Transcoding
 
 Transcoding services can be purchased directly from individual Orchestrators operating in Livepeer's public Transcoding Marketplace.
 
-Services are provide on a pay-as-you-go basis using Ethereum.
+Services are provide on a pay-as-you-go basis using Ethereum as currency and payment clearing.
 
 1. Install `geth`, which is [client software to run Ethereum, released by Ethereum Foundation](https://geth.ethereum.org/docs/install-and-build/installing-geth).
 
