@@ -21,26 +21,47 @@ Audio was produced and added in post-production.
 # Action Timeline
 
 `00:00` video starts
+
 `00:00` title sequence starts
+
 `.....`
+
 `00:06` desktop interface appears, showing OBS Studio and File Browser windows
+
 `00:08` the "Start Streaming" button is pressed in OBS Studio
+
 `.....`
+
 `00:16` the first `.ts` segment appears: `2198ccb3_0.ts`
+
 `00:16` the `hls` playlist manifest appears: `2198ccb3.m3u8`
+
 `00:18` the second `.ts` segment appears: `2198ccb3_1.ts`
+
 `.....`
+
 `00:26` the sixth `.ts` segment appears: `2198ccb3_5.ts`
+
 `-----`
+
 `00:28` the seventh `.ts` segment appears: `2198ccb3_6.ts`
+
 `00:28` the first `.ts` segment disappears: `2198ccb3_0.ts`
+
 `-----`
+
 `00:30` the eighth `.ts` segment appears: `2198ccb3_7.ts`
+
 `00:30` the second `.ts` segment disappears: `2198ccb3_1.ts`
+
 `.....`
+
 `01:08` the "Stop Streaming" button is pressed in OBS Studio
+
 `01:10` all `.ts` segments and `.m3u8` manifest disappear
+
 `01:12` closing sequence starts
+
 `01:18` video ends.
 
 # Notes
