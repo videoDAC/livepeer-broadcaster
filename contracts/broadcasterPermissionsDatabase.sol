@@ -27,9 +27,9 @@ contract broadcasterPermissionsDatabase {
     string internal constant NOT_AUTHORISED = "YOU_ARE_NOT_AUTHORISED_TO_DO_THAT";
 
     // function is used to set up the contract
-    // grants admin rights to address deploying the database contract
-    constructor() {
-        permissionsSet[msg.sender] = PermissionsSet(false, false, true);
+    // grants admin rights to an address    
+    constructor(address admin) {
+        permissionsSet[admin] = PermissionsSet(false, false, true);
     }
 
     // updates the database
