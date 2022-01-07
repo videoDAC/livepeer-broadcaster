@@ -11,7 +11,7 @@ contract broadcasterPermissionsDatabase {
 // If broadcaster has an address itself, it can also write to the database.
 // A broadcaster may also wish to deploy its own instance of the database.
 
-    // this is thhttps://kovan-optimistic.etherscan.ioe basic set of permissions stored in the database.
+    // this is the basic set of permissions stored in the database.
     struct PermissionsSet {
         bool canPublish;
         bool canConsume;
