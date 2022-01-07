@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 
 // A simple database for storing and updating user permissions.
-// Permissions relate to publish to, and consuming from a broadcaster.
+// Permissions relate to a) publishing to, and b) consuming from, a broadcaster.
 
 pragma solidity ^0.8.6;
 
