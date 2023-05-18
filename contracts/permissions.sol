@@ -14,7 +14,7 @@ contract permissions {
         canAccess = false;
     }
 
-    function canAccess(address user) external view returns (bool) {
+    function isPermitted(address user) external view returns (bool) {
         return canAccess;
     }
 
