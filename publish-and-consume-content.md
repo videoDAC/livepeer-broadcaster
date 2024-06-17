@@ -113,7 +113,7 @@ ffmpeg \
 
 ![image](https://user-images.githubusercontent.com/2212651/80693355-810b3180-8af0-11ea-9c98-a23e73070d77.png)
 
-5. Run `curl http://127.0.0.1:7935/status`
+5. Run `curl http://127.0.0.1:5935/status`
 
 6. View metadata about the status of the Livepeer Broadcaster, including details of stream(s) being served
 
@@ -183,7 +183,7 @@ This section explains how to [publish content to](#publish-content-using-obs-stu
 
 3. Select Media > Open Network Stream... (Ctrl-N)
 
-4. Enter `http://127.0.0.1:8935/stream/obs-studio.m3u8` as the network URL
+4. Enter `http://127.0.0.1:9935/stream/obs-studio.m3u8` as the network URL
 
 ![image](https://user-images.githubusercontent.com/2212651/79850448-93df8100-83e1-11ea-9133-1230ab121a66.png)
 
