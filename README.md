@@ -24,7 +24,7 @@ It can **serve** streaming content over `http` with a `.m3u8` extension, for pla
 
 ## Minimum Setup
 
-Here are instructions to setup a Livepeer Broadcaster on a local computer. They will work on Mac or Linux (Ubuntu). 
+Here are instructions to setup a Livepeer Broadcaster on a local computer. They will work on Mac or Linux.
 
 1. Download the latest release of pre-compiled software from [Livepeer's Release Page on Github](https://github.com/livepeer/go-livepeer/releases), under where it says **Assets**:
 
@@ -42,7 +42,7 @@ Here are instructions to setup a Livepeer Broadcaster on a local computer. They 
 
 - On Mac, run `cd Downloads/livepeer-darwin-amd64` or `cd Downloads/livepeer-darwin-arm64`
 
-- On Linux (Ubuntu), run `cd livepeer-linux-amd64`
+- On Linux, run `cd livepeer-linux-amd64`
 
 4. Run `./livepeer -broadcaster`
 
