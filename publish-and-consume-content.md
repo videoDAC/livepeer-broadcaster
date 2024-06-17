@@ -34,7 +34,7 @@ Install `FFmpeg` on a Mac using instructions on [FFmpeg's website](https://www.f
 1. Run the following command:
 ```
 ffmpeg -re -f lavfi -i \
-       testsrc=size=500x500:rate=30,format=yuv420p \
+       testsrc=size=640x360:rate=30,format=yuv420p \
        -f lavfi -i sine -c:v libx264 -b:v 1000k \
        -x264-params keyint=60 -c:a aac -f flv \
        rtmp://127.0.0.1:1935/test_source
@@ -67,7 +67,7 @@ ffmpeg -re -f lavfi -i \
 
 2. See the content from the `test_source` stream being played back:
 
-![image](https://github.com/videoDAC/livepeer-broadcaster/assets/2212651/2c4af934-951d-4c24-99b0-bbee37843f4d)
+![image](https://github.com/videoDAC/livepeer-broadcaster/assets/2212651/7025bbf5-b7bc-45b3-bc19-f64d3841e3ff)
 
 [Return to main page](./README.md#next-steps)
 
@@ -83,7 +83,7 @@ ffmpeg -re -f lavfi -i \
 
 2. View metadata about the stream(s) of content available for consumption, with `.m3u8` extension(s):
 
-![image](https://github.com/videoDAC/livepeer-broadcaster/assets/2212651/692b9f83-fccf-4bad-a564-42118c6f0b46)
+![image](https://github.com/videoDAC/livepeer-broadcaster/assets/2212651/e7f69af6-f8c9-4b37-919d-3ea41a34b844)
 
 3. Run `curl http://127.0.0.1:9935/stream/test_source/source.m3u8`
 
