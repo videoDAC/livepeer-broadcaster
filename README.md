@@ -28,19 +28,19 @@ Here are instructions to setup a Livepeer Broadcaster on a local computer. They 
 
 1. Download the latest release of pre-compiled software from [Livepeer's Release Page on Github](https://github.com/livepeer/go-livepeer/releases), under where it says **Assets**:
 
-- On a Mac, download the `livepeer-darwin-amd64.tar.gz` file to the _Downloads_ folder
+- On a Mac, download the `livepeer-darwin-amd64.tar.gz` file of the `livepeer-darwin-arm64.tar.gz` file to the _Downloads_ folder
 
-- On Linux (Ubuntu), download the `livepeer-linux-amd64.tar.gz` file
+- On Linux, download the `livepeer-linux-amd64.tar.gz` file
 
 2. Unzip the file:
 
 - On Mac, simply open the file, and it will extract to the folder containing the file (_Downloads_).
 
-- On Linux (Ubuntu), open the `livepeer-darwin-amd64.tar.gz` file then click "Extract", and extract it to "Home".
+- On Linux, open the `livepeer-linux-amd64.tar.gz` file then click "Extract", and extract it to "Home".
 
 3. Open `Terminal`, and navigate to the folder containing the `livepeer` binary:
 
-- On Mac, run `cd Downloads/livepeer-darwin-amd64`
+- On Mac, run `cd Downloads/livepeer-darwin-amd64` or `cd Downloads/livepeer-darwin-arm64`
 
 - On Linux (Ubuntu), run `cd livepeer-linux-amd64`
 
@@ -50,7 +50,7 @@ Here are instructions to setup a Livepeer Broadcaster on a local computer. They 
 
 **Livepeer Broadcaster is now running.**
 
-![image](https://user-images.githubusercontent.com/2212651/79856413-f177cb80-83e9-11ea-8ece-ac1f9c143f08.png)
+![image](https://github.com/videoDAC/livepeer-broadcaster/assets/2212651/d62026e6-620e-455b-8b8f-58b0c8cf7fa8)
 
 # Next Steps
 
