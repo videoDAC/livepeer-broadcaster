@@ -83,7 +83,7 @@ ffmpeg \
 
 0. Make sure content is being published into Livepeer Broadcaster.
 
-1. Run `ffplay http://127.0.0.1:8935/stream/test_source.m3u8`
+1. Run `ffplay http://127.0.0.1:9935/stream/test_source.m3u8`
 
   - `test_source` is the "stream key" used when publishing content to Livepeer Broadcaster.
 
@@ -99,7 +99,7 @@ ffmpeg \
 
 0. Make sure content is being published into Livepeer Broadcaster.
 
-1. Run `curl http://127.0.0.1:8935/stream/test_source.m3u8`
+1. Run `curl http://127.0.0.1:9935/stream/test_source.m3u8`
 
   - `test_source` is the "stream key" used when publishing content to Livepeer Broadcaster.
 
@@ -107,7 +107,7 @@ ffmpeg \
 
 ![image](https://user-images.githubusercontent.com/2212651/80692866-db57c280-8aef-11ea-9f68-05659ad3c7c6.png)
 
-3. Run `curl http://127.0.0.1:8935/stream/test_source/source.m3u8`
+3. Run `curl http://127.0.0.1:9935/stream/test_source/source.m3u8`
 
 4. View metadata about the segment(s) of content available for consumption, with `.ts` extension(s):
 
