@@ -3,7 +3,6 @@ Contents:
 - [Transcoding Overview](#transcoding-overview)
 - [Local Transcoding](#local-transcoding)
 - [Local Distributed Transcoding](#local-distributed-transcoding)
-- [Remote Transcoding](#remote-transcoding)
 - [Outsourced Transcoding (requires payment in ETH)](#outsourced-transcoding)
 
 ### Transcoding Overview
@@ -19,7 +18,7 @@ This chart shows the most common display resolutions, 16:9 formats shown in blue
 
 ### Local Transcoding
 
-![image](https://user-images.githubusercontent.com/2212651/112747032-6f682d80-8fd0-11eb-9bcc-c5e8851e4c44.png)
+![image](https://github.com/videoDAC/livepeer-broadcaster/assets/2212651/8e795b45-d516-45b2-9597-af2f85170e8a)
 
 Transcoding can be performed on the same computer / server running the Livepeer Broadcaster.
 
@@ -27,7 +26,7 @@ Transcoding can be performed on the same computer / server running the Livepeer 
 ```
 ./livepeer \
         -broadcaster \
-        -orchAddr 127.0.0.1:8936 \
+        -orchAddr 127.0.0.1:8935 \
         -transcodingOptions P144p30fps16x9,P240p30fps16x9 \
         -v 99
 ```
@@ -40,8 +39,7 @@ Transcoding can be performed on the same computer / server running the Livepeer 
 ./livepeer \
         -orchestrator \
         -transcoder \
-        -serviceAddr 127.0.0.1:8936 \
-        -cliAddr 127.0.0.1:7936 \
+        -serviceAddr 127.0.0.1:8935 \
         -v 99
 ```
   - `-orchestrator` and `-transcoder` tell the software to run in Orchestrator and Transcoder modes
@@ -50,9 +48,11 @@ Transcoding can be performed on the same computer / server running the Livepeer 
 
 **Livepeer Broadcaster is now running with Local Transcoding enabled.**
 
-3. [Inspect the content metadata](#inspect-content-metadata) to see the additional streams available for consumption:
+3. Start publishing content as described in [the page about publishing and consuming content](./publish-and-consume-content.md)
 
-![image](https://user-images.githubusercontent.com/2212651/80700605-9cc80500-8afb-11ea-9ef4-b041b7f39a55.png)
+4. [Inspect the content metadata](publish-and-consume-content.md#inspect-content-metadata) to see the additional streams available for consumption:
+
+![image](https://github.com/videoDAC/livepeer-broadcaster/assets/2212651/4fadc4ce-0c79-46a6-809c-df67b8c8febc)
 
 Note: many players of streaming content will dynamically switch between available streams in order to optimise the quality of playback given the available bandwidth.
 
@@ -60,7 +60,7 @@ Note: many players of streaming content will dynamically switch between availabl
 
 ### Local Distributed Transcoding
 
-![image](https://user-images.githubusercontent.com/2212651/112747170-33819800-8fd1-11eb-86e3-293cf12b0169.png)
+![image](https://github.com/videoDAC/livepeer-broadcaster/assets/2212651/42583d9c-927f-422b-b23b-8b29fa7a3f36)
 
 Transcoding activities can also be distributed across an Orchestrator, and one or more Transcoders.
 
@@ -68,7 +68,7 @@ Transcoding activities can also be distributed across an Orchestrator, and one o
 ```
 ./livepeer \
         -broadcaster \
-        -orchAddr 127.0.0.1:8936 \
+        -orchAddr 127.0.0.1:8935 \
         -transcodingOptions P144p30fps16x9,P240p30fps16x9 \
         -v 99
 ```
@@ -78,8 +78,7 @@ Transcoding activities can also be distributed across an Orchestrator, and one o
 ./livepeer \
         -orchestrator \
         -orchSecret pineapple \
-        -serviceAddr 127.0.0.1:8936 \
-        -cliAddr 127.0.0.1:7936 \
+        -serviceAddr 127.0.0.1:8935 \
         -v 99
 ```
   - `-orchSecret` is a way for this Orchestrator to allow Transcoders to authenticate
@@ -89,7 +88,7 @@ Transcoding activities can also be distributed across an Orchestrator, and one o
 ./livepeer \
         -transcoder \
         -orchSecret pineapple \
-        -orchAddr 127.0.0.1:8936 \
+        -orchAddr 127.0.0.1:8935 \
         -v 99
 ```
 
@@ -97,99 +96,51 @@ Transcoding activities can also be distributed across an Orchestrator, and one o
 
 [Return to main page](./README.md#next-steps)
 
-### Remote Transcoding
+### Outsourced Transcoding (requires ETH on Arbitrum One)
 
-Transcoding can also be performed on a different computer / server from the Livepeer Broadcaster.
+Transcoding services can be purchased directly from individual Orchestrators operating in Livepeer's public Transcoding Marketplace. Services are provided on a pay-as-you-go basis using Ether as currency, and Arbitrum One for payment clearing. Arbitrum One is a Layer 2 Optimistic Rollup on Ethereum.
 
-For this you will need two hosts (computers / servers):
+1. Obtain an RPC endpoint onto Arbitrum, using [Alchemy](https://www.alchemy.com/) (requires sign-up). Alternatively, run your own Arbitrum RPC endpoint using [these instructions](https://docs.arbitrum.io/run-arbitrum-node/quickstart).
 
-- For the Livepeer Broadcaster
-  - This host will need to be able to connect to port `8936` on the host of the remote transcoder.
-- For the remote Transcoder
-
-1. Open a `Terminal` on the Livepeer Broadcaster host, and run the following command:
+2. Open another `Terminal` and run the following command:
 ```
 ./livepeer \
         -broadcaster \
-        -orchAddr 192.168.2.113:8936 \
+        -network arbitrum-one-mainnet \
         -transcodingOptions P144p30fps16x9,P240p30fps16x9 \
-        -v 99
-```
-  - `192.168.2.113` is the IP address of the remote transcoder host
-
-2. Open a `Terminal` on the remote Transcoder host, and run the following command:
-```
-./livepeer \
-        -orchestrator \
-        -transcoder \
-        -serviceAddr 192.168.2.113:8936 \
-        -cliAddr 127.0.0.1:7936 \
-        -v 99
-```
-  - `192.168.2.113` is the IP address of the remote transcoder host
-
-**Livepeer Broadcaster is now running with Remote Transcoding enabled.**
-
-[Return to main page](./README.md#next-steps)
-
-### Outsourced Transcoding
-
-Transcoding services can be purchased directly from individual Orchestrators operating in Livepeer's public Transcoding Marketplace.
-
-Services are provide on a pay-as-you-go basis using Ethereum as currency and payment clearing.
-
-1. Install `geth`, which is [client software to run Ethereum, released by Ethereum Foundation](https://geth.ethereum.org/docs/install-and-build/installing-geth).
-
-- This client software can be used to sync Ethereum blockchain, and to broadcast transactions to be included in the blockchain.
-
-2. Open a `Terminal` and run the following command to run `geth` client
-```
-geth -rpc -rpcapi eth,net,web3 --syncmode "light"
-```
-
-3. Wait until `geth` has imported all new block headers, and has started downloading 1 block at a time:
-
-![image](https://user-images.githubusercontent.com/2212651/80710566-968e5480-8b0c-11ea-81b8-f0efd19fa875.png)
-
-4. Open another `Terminal` and run the following command:
-```
-./livepeer \
-        -broadcaster \
-        -network mainnet \
-        -transcodingOptions P144p30fps16x9,P240p30fps16x9 \
-        -ethUrl http://127.0.0.1:8545 \
+        -ethUrl {insert RPC endpoint here} \
         -pixelsPerUnit 1 \
         -maxPricePerUnit 1 \
         -v 99
 ```
-  - `mainnet` signifies Ethereum's main network
-  - `-ethUrl` is the network location of the `geth` service.
+  - `arbitrum-one-mainnet` signifies Arbitrum One network.
+  - `-ethUrl` is the location of the RPC endpoint e.g. from Alchemy.
   - `-pixelsPerUnit` and `-maxPricePerUnit` are for setting the maximum price to be paid for Transcoding
 
-5. Enter a Passphrase twice:
+3. Enter a Passphrase twice:
 
-![image](https://user-images.githubusercontent.com/2212651/80711420-f20d1200-8b0d-11ea-9f30-c33c4f80de06.png)
+![image](https://github.com/videoDAC/livepeer-broadcaster/assets/2212651/bd9c4d14-0558-4fbc-b21a-f6f878c08a1e)
 
 Note: no characters will appear in the window when typing the passphrase.
 
 The Passphrase will be used to encrypt the Private Key generated by this process. The Private Key will be used to sign transactions for publishing on Ethereum.
 
-6. Enter the Passphrase again to start the Livepeer Broadcaster.
+4. Enter the Passphrase again to start the Livepeer Broadcaster.
 
-7. Wait until the text `CLI server listening on 127.0.0.1:7935` is displayed in the console:
+5. Wait until the text `CLI server listening on 127.0.0.1:5935` is displayed in the console:
 
-![image](https://user-images.githubusercontent.com/2212651/80712819-24b80a00-8b10-11ea-987f-6cee6a29bc52.png)
+![image](https://github.com/videoDAC/livepeer-broadcaster/assets/2212651/14818484-b996-46ae-bdd6-d603aa0e5540)
 
 8. Open a `Terminal`, and run the following command from the folder containing `livepeer_cli` binary:
 ```
-./livepeer_cli
+./livepeer_cli -http 5935
 ```
 
-9. Send some ETH from your wallet to the `ETH Account` listed under `NODE STATS`.
+9. Send some ETH from your wallet to the `Broadcaster Account` listed under `NODE STATS`.
 
-10. In `livepeer_cli`, run option `12. Invoke "deposit broadcasting funds" (ETH)`
+10. In `livepeer_cli`, run option `11. Invoke "deposit broadcasting funds" (ETH)`
 
-![image](https://user-images.githubusercontent.com/2212651/80714073-081cd180-8b12-11ea-8fc4-070282141905.png)
+![image](https://github.com/videoDAC/livepeer-broadcaster/assets/2212651/e9d9fd59-fc1f-4e9c-a645-5e81fc734abc)
 
 This command will deposit some ETH into a smart contract in Livepeer's protocol, which can be spent on Transcoding services.
 
