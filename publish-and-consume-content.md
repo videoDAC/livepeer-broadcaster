@@ -47,33 +47,11 @@ ffmpeg -re -f lavfi -i \
   
 2. See that Livepeer Broadcaster is receiving a stream called `test_source`.
 
-![image](https://user-images.githubusercontent.com/2212651/80678235-2a91f900-8ad8-11ea-801e-fd2724eb5b43.png)
+![image](https://github.com/videoDAC/livepeer-broadcaster/assets/2212651/136b17be-2d04-46af-93d0-649e6ef14b1f)
 
 3. Look in `~/.lpData/offchain` folder to see the segments of video which make up the livestream.
 
 ![image](https://user-images.githubusercontent.com/2212651/112746828-24014f80-8fcf-11eb-997d-7fa956a74950.png)
-
-[Return to main page](./README.md#next-steps)
-
-#### Publish a recorded video
-
-`FFmpeg` can be used to publish recorded content to Livepeer Broadcaster:
-
-0. Make sure Livepeer Broadcaster is running on localhost `127.0.0.1`.
-
-1. Run the following command:
-```
-ffmpeg \
-        -re \
-        -i video.mov \
-        -codec copy \
-        -f flv rtmp://127.0.0.1:1935/recorded_content
-```
-  - `recorded_content` is the "stream key" for this publication.
-  
-2. See that Livepeer Broadcaster is receiving a stream called `recorded_content`.
-
-![image](https://user-images.githubusercontent.com/2212651/80683054-3209d000-8ae1-11ea-9d3f-edd4d22be918.png)
 
 [Return to main page](./README.md#next-steps)
 
@@ -89,7 +67,7 @@ ffmpeg \
 
 2. See the content from the `test_source` stream being played back:
 
-![image](https://user-images.githubusercontent.com/2212651/79850180-2af80900-83e1-11ea-86ea-2d97ea83d5ef.png)
+![image](https://github.com/videoDAC/livepeer-broadcaster/assets/2212651/2c4af934-951d-4c24-99b0-bbee37843f4d)
 
 [Return to main page](./README.md#next-steps)
 
@@ -105,19 +83,19 @@ ffmpeg \
 
 2. View metadata about the stream(s) of content available for consumption, with `.m3u8` extension(s):
 
-![image](https://user-images.githubusercontent.com/2212651/80692866-db57c280-8aef-11ea-9f68-05659ad3c7c6.png)
+![image](https://github.com/videoDAC/livepeer-broadcaster/assets/2212651/692b9f83-fccf-4bad-a564-42118c6f0b46)
 
 3. Run `curl http://127.0.0.1:9935/stream/test_source/source.m3u8`
 
 4. View metadata about the segment(s) of content available for consumption, with `.ts` extension(s):
 
-![image](https://user-images.githubusercontent.com/2212651/80693355-810b3180-8af0-11ea-9c98-a23e73070d77.png)
+![image](https://github.com/videoDAC/livepeer-broadcaster/assets/2212651/250f3914-eab8-4b18-821d-68f417a8607b)
 
-5. Run `curl http://127.0.0.1:5935/status`
+5. Run `curl http://127.0.0.1:5935/status`, or open [http://127.0.0.1:5935/status](http://127.0.0.1:5935/status) in a browser.
 
 6. View metadata about the status of the Livepeer Broadcaster, including details of stream(s) being served
 
-![image](https://user-images.githubusercontent.com/2212651/112746370-eb13ab80-8fcb-11eb-8062-40d5d0b0a48a.png)
+![image](https://github.com/videoDAC/livepeer-broadcaster/assets/2212651/dcbd841d-c68d-459c-805e-f530cdb186a6)
 
 [Return to main page](./README.md#next-steps)
 
@@ -165,7 +143,7 @@ This section explains how to [publish content to](#publish-content-using-obs-stu
 
 14. See that Livepeer Broadcaster is receiving a stream called `obs-studio`.
 
-![image](https://user-images.githubusercontent.com/2212651/79847289-25002900-83dd-11ea-8493-86f22e0dff56.png)
+![image](https://github.com/videoDAC/livepeer-broadcaster/assets/2212651/c2c17faf-96cf-4dce-abfd-e375505afe1b)
 
 [Learn about what other sources of content can be configured](#configuring-content-in-obs-studio).
 
@@ -185,7 +163,7 @@ This section explains how to [publish content to](#publish-content-using-obs-stu
 
 4. Enter `http://127.0.0.1:9935/stream/obs-studio.m3u8` as the network URL
 
-![image](https://user-images.githubusercontent.com/2212651/79850448-93df8100-83e1-11ea-9133-1230ab121a66.png)
+![image](https://github.com/videoDAC/livepeer-broadcaster/assets/2212651/e62b3a52-1043-4255-b36a-4c2d552ddcdd)
 
 5. Click "Play", and see the content from the `obs-studio` stream:
 
